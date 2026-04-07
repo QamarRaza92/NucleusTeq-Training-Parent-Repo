@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qamar Raza Portfolio</title>
+    <link rel="stylesheet" href="QamarRaza_styles.css">
+</head>
+<body id="main">
+        <!-- ========== HEADER SECTION ========== -->
+    <!-- Profile photo, name, title and social media links -->
+      <header id="header">
+        <img id="header-image" src="image.png"
+        alt="Profile image of Qamar Raza" title="Qamar Raza">
+        <h1>Qamar Raza</h1> 
+        <h2>Data Scientist</h2>
+        
+        <nav>
+           <a href="https://github.com/QamarRaza92" target="_blank">Github</a> <span>        </span>
+           <a href="https://www.instagram.com" target="_blank">Instagram</a>
+           <a href="https://www.linkedin.com/in/qamar-raza-090693280/" target="_blank">LinkedIn</a>
+        </nav>
+      </header>
+      <hr />
+
+          <!-- ========== NAVIGATION MENU ========== -->
+    <!-- Page internal links for smooth scrolling -->
+      <nav class="navigation">
+        <h2>Navigation</h2>
+        <ul type="square">
+          <li class="navigation-li"> <a href="#about">About</a> </li>
+          <li class="navigation-li"> <a href="#skills">Skills</a> </li>
+          <li class="navigation-li"> <a href="#education">Education</a> </li>
+          <li class="navigation-li"> <a href="#projects">Projects</a> </li>
+          <li class="navigation-li"> <a href="#contact">Contact</a> </li>
+        </ul>
+      </nav>
+      <hr/>
+
+           <!-- About Me - Brief introduction-->
+      <section id="about">
+        <h2>About me</h2>
+        <p>
+          I’m an ambitious and driven aspiring <strong>Data Scientist</strong> with a strong tech foundation and a deep passion for decoding complex problems through data. Currently pursuing my <strong>B.Tech</strong>, I specialize in crafting intelligent solutions using <em>machine learning, AI, and analytics</em>.
+        </p>
+        <hr/> 
+      </section>
+
+
+    <!-- Skills - Categorized into Technical and Soft skills -->
+    <!-- Technical Skills further divided into Programming, Platforms, Frameworks -->
+      <section id="skills">
+        <h2>Skills</h2>
+        <ul>
+          <li>
+            Technical Skills
+            <ul>
+              <li>
+                Programming Language
+                <ul>
+                  <li>
+                    Python
+                  </li>
+                  <li>
+                    Java
+                  </li>
+                  <li>
+                    C++
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Platforms
+                <ul>
+                  <li>
+                    Github
+                  </li>
+                  <li>
+                    Google Colab
+                  </li>
+                  <li>
+                    Jupyter Notebook
+                  </li>
+                  <li>
+                    VSCode
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Frameworks
+                <ul>
+                  <li>
+                    Flask
+                  </li>
+                  <li>
+                    FastAPI
+                  </li>
+                  <li>
+                    Django
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Soft Skills
+            <ul>
+              <li>Communication</li>
+              <li>Leadership</li>
+              <li>Team work & Collaboration</li>
+            </ul>
+          </li>
+        </ul>
+        <hr/> 
+      </section>
+
+    <!-- Education - Academic qualifications with grades -->
+      <section id="education">
+        <h2>Education</h2>
+        <table border class="edu-table">
+          <thead>
+            <tr>
+              <th>Degree</th>
+              <th>Institution</th>
+              <th>Year</th>
+              <th>Grade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>M.Tech</td>
+              <td>IIT Delhi</td> 
+              <td>2026</td> 
+              <td rowspan="2">A+</td>
+            </tr>
+            <tr>
+              <td>B.Tech</td>
+              <td>Medicaps University</td> 
+              <td>2024</td> 
+            </tr>
+            <tr>
+              <td>12th</td>
+              <td>Rock Wood School</td> 
+              <td>2020</td> 
+              <td>90.8</td>
+            </tr>
+            <tr>
+              <td>10th</td>
+              <td>Rock Wood School</td> 
+              <td>2018</td> 
+              <td>94.33</td>
+            </tr>
+          </tbody>
+        </table>
+        <hr/> 
+      </section>
+
+    <!-- Projects - 3 major ML/AI projects with links and tech stack -->
+      <section id="projects">
+        <h2>Projects</h2>
+        <ol>
+          <li class="projects-li">
+            Gender Detection Through Facial Images <br>
+            <strong>Project Link: </strong> <i><a href="https://github.com/QamarRaza92/Gender-Detection-Final-WebApp-Version-2" target="_blank">https://github.com/QamarRaza92/Gender-Detection-Final-WebApp-Version-2</a> </i>
+            <ul>
+              <li class="projects-li2">Built CNN with Transfer Learning (VGG16/ResNet) for gender classification</li>
+              <li class="projects-li2">Trained on 3,000+ samples achieving 99% training accuracy and 72% test accuracy</li>
+              <li class="projects-li2">Deployed real-time gender prediction API using FastAPI backend</li>
+              <li class="projects-li2"><strong>Tech Stack:</strong> Python, TensorFlow/Keras, FastAPI, NumPy, Pandas</li>
+            </ul>
+          </li>
+          <li class="projects-li">
+            IPL Match Winning Prediction <br>
+            <strong>Project Link: </strong> <i><a href="https://ipl-match-winning-predictor.onrender.com" target="_blank">https://ipl-match-winning-predictor.onrender.com</a> </i>
+            <ul>
+              <li class="projects-li2">Used IPL match data (2008–2024) with engineered features like run rate and wickets</li>
+              <li class="projects-li2">Achieved 84% accuracy using Logistic Regression</li>
+              <li class="projects-li2">Deployed with Flask + Pickle as live application</li>
+              <li class="projects-li2"><strong>Tech Stack:</strong> Python, Sklearn, Flask, NumPy, Pandas</li>
+            </ul>
+          </li>
+          <li class="projects-li">
+            Laptop Price Prediction <br>
+            <strong>Project Link: </strong> <i><a href="https://laptop-price-prediction-sqgd.onrender.com" target="_blank">https://laptop-price-prediction-sqgd.onrender.com</a></i>
+            <ul>
+              <li class="projects-li2">Built regression model on 1,300+ laptop records using feature engineering</li>
+              <li class="projects-li2">Achieved  <strong>R<sup>2</sup>=0.89</strong> and reduced RMSE to ~7.2 using ensemble models</li>
+              <li class="projects-li2">Deployed as interactive Flask app on Render</li>
+              <li class="projects-li2"><strong>Tech Stack:</strong> Python, Flask, Sklearn, Matplotlib, Pandas</li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+      <hr>
+
+    <!-- Contact Form - For visitors to reach out -->
+    <!-- Includes name, email, age, date/time, gender, country, message -->
+      <section id="contact">
+        <h2>Contact Me</h2>
+        <form action="" target="_parent">
+            <fieldset>
+                <legend>Contact Me</legend>
+                <label for="name">Name:</label> <input type="text" placeholder="Enter your name" id="name" required > <br><br>
+                <label for="email">Email:</label> <input type="email" id="email" placeholder="Enter your mail" required> <br><br>
+                <label for="age">Age:</label>   <input type="number" id="age"> <br><br>
+                <label for="date">Contact date:</label> <input type="date" id="date"> <label for="time">Time</label> <input type="time" id="time">  <br> <br>
+                <label class="contact-special-case">Gender:</label> 
+                        <input type="radio" name="gender" value="m" id="male"><label class="contact-special-case" for="male">Male</label>  
+                        <input type="radio" name="gender" value="f" id="female"><label class="contact-special-case" for="female">Female</label>
+                        <input type="radio" name="gender" value="o" id="other"><label class="contact-special-case" for="other">Other</label>  <br><br>
+                <label for="country">Country:</label> 
+                <select id="country">
+                    <optgroup label="Asia">
+                        <option value="India">India</option>
+                        <option value="Pakistan">Pakistan</option>
+                        <option value="China">China</option>
+                        <option value="Sri Lanka">Sri Lanka</option>
+                        <option value="Bangladesh">Bangladesh</option>
+                        <option value="Russia">Russia</option>
+                    </optgroup>
+
+                    <optgroup label="Africa">
+                        <option value="Egypt">Egypt</option>
+                        <option value="Namibia">Namibia</option>
+                        <option value="Uganda">Uganda</option>
+                        <option value="Rawanda">Rawanda</option>
+                        <option value="South Africa">South Africa</option>
+                        <option value="Zimbabwe">Zimbabwe</option>
+                    </optgroup>
+
+                    <optgroup label="Europe">
+                        <option value="England">England</option>
+                        <option value="France">France</option>
+                        <option value="Germany">Germany</option>
+                        <option value="Italy">Italy</option>
+                        <option value="Poland">Poland</option>
+                        <option value="Portugal">Portugal</option>
+                    </optgroup>
+
+                    <optgroup label="North America">
+                        <option value="USA">USA</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Bahamas">Bahamas</option>
+                        <option value="Barbados">Barbados</option>
+                        <option value="Panama">Panama</option>
+                        <option value="Jamaica">Jamaica</option>
+                    </optgroup>
+
+                    <optgroup label="South America">
+                        <option value="Mexico">Mexico</option>
+                        <option value="Brazil">Brazil</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Colombia">Colombia</option>
+                        <option value="Venezuela">Venezuela</option>
+                        <option value="Peru">Peru</option>
+                    </optgroup>
+
+                    <optgroup label="Australia">
+                        <option value="Australia">Australia</option>
+                        <option value="New Zealand">New Zealand</option>
+                        <option value="Papua New Guinea">Papua New Guinea</option>
+                        <option value="Fiji">Fiji</option>
+                        <option value="Samoa">Samoa</option>
+                        <option value="Solomon Islands">Solomon Islands</option>
+                    </optgroup>
+                </select> <br><br>
+                <label for="msg">Message:</label> <br> <textarea id="msg" placeholder="Type your message" rows="5" cols="50"></textarea>  <br><br>
+                <button type="reset">Reset</button> <button type="submit">Submit</button>
+            </fieldset>
+        </form>
+      </section>
+      <hr>
+
+    <!-- ========== FOOTER ========== -->
+    <!-- Copyright info and contact links (email, GitHub, LinkedIn) -->
+    <footer>
+    <p>© 2026 <strong>Qamar Raza</strong>. All rights reserved.</p>
+    <p>
+        <a href="mailto:raza8bb805@gmail.com" target="_blank">📧 Email</a> | 
+        <a href="https://github.com/QamarRaza92" target="_blank">GitHub</a> | 
+        <a href="https://linkedin.com/in/qamar-raza-090693280/" target="_blank">LinkedIn</a>
+    </p>
+    </footer>
+      <hr>
+</body>
+</html>

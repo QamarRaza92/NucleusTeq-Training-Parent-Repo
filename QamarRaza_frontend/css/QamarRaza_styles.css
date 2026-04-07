@@ -1,0 +1,305 @@
+/* =========================================
+   1. GLOBAL STYLES & LAYOUT
+   ========================================= */
+#main {
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 1200px;
+    box-sizing: border-box;
+    background-color: #faf9f8;
+    color: #2d3e50;
+}
+
+/* =========================================
+   2. HEADER & BRANDING
+   ========================================= */
+#header {
+    padding: 25px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #0a2342, #1b3b5c);
+    color: white;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+#header-image {
+    border-radius: 50%;
+    border: 4px solid #64ffda;
+    width: 200px; 
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+#header h2 {
+    color: #8dd0e0;
+    margin-top: 5px;
+}
+
+#header a {
+    color: #9ad4d4;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: 500;
+}
+
+#header a:hover {
+    color: white;
+    border-bottom: 2px solid #64ffda;
+}
+
+/* =========================================
+   3. NAVIGATION MENU
+   ========================================= */
+.navigation ul {
+    display: flex;
+    list-style: none;
+    padding: 10px 20px;
+    gap: 25px;
+    background: white;
+    border-radius: 50px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.navigation-li {
+    text-align: center;
+    padding: 8px 5px;
+    border-radius: 30px;
+    border: none;
+    background: none;
+    color: #0a2342;
+    font-weight: 600;
+    font-size: 16px;
+    width: 100px;
+    height: auto;
+}
+
+.navigation-li:hover {
+    transition: 0.3s;
+    background: #e6f0fa;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 12px rgba(10, 35, 66, 0.15);
+}
+
+.navigation a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* =========================================
+   4. CONTENT SECTIONS (General)
+   ========================================= */
+section {
+    margin: 25px 0;
+    padding: 25px;
+    border: 1px solid #d8dee9;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    border-radius: 12px;
+    background: white;
+}
+
+/* --- Skills Section --- */
+#skills li {
+    line-height: 1.8;
+    font-weight: 500;
+    color: #2d3e50;
+}
+
+#skills ul ul {
+    margin-left: 25px;
+}
+
+/* --- Education Table --- */
+.edu-table {
+    border: 1px solid #cbd5e1;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 16px;
+}
+
+.edu-table th,
+.edu-table td {
+    border: 1px solid #cbd5e1;
+    padding: 14px;
+}
+
+.edu-table th {
+    text-align: center;
+    background: #1b3b5c;
+    color: white;
+}
+
+.edu-table tr:nth-child(odd) {
+    background-color: #f8fafc;
+}
+
+.edu-table tr:hover {
+    background-color: #eef2f6;
+}
+
+/* --- Projects Section --- */
+.projects-li {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #cbd5e1;
+}
+
+.projects-li:last-child {
+    border-bottom: none;
+}
+
+.projects-li2 {
+    margin-bottom: 8px;
+    color: #1f5e5e;
+}
+
+#projects a {
+    text-decoration: none;
+    color: #1b3b5c;
+    font-weight: 500;
+}
+
+#projects a:hover {
+    transition: 0.3s;
+    color: #0f766e;
+    text-decoration: underline;
+}
+
+/* =========================================
+   5. CONTACT FORM
+   ========================================= */
+#contact {
+    border-radius: 12px;
+    max-width: 600px;
+    padding: 25px;
+    margin: 0 auto;
+}
+
+#contact label {
+    display: block;
+    margin-top: 12px;
+    font-weight: 500;
+    color: #1b3b5c;
+}
+
+#contact input, #contact select, #contact textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+#contact input:hover, #contact select:hover, #contact textarea:hover {
+    transition: 0.2s;
+    border-color: #1b3b5c;
+    box-shadow: 0 0 0 2px rgba(27, 59, 92, 0.1);
+    transform: scale(1.01);
+}
+
+#contact .contact-special-case {
+    display: inline;
+    margin-right: 15px;
+    font-weight: normal;
+}
+
+#contact input[type="radio"] {
+    width: auto;
+    margin-right: 5px;
+}
+
+#contact button {
+    background: #1b3b5c;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    margin-top: 20px;
+    margin-right: 15px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+#contact button:hover {
+    transition: 0.3s;
+    background: #0a2342;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(27, 59, 92, 0.3);
+    border: none;
+    color: white;
+}
+
+#contact button[type="reset"] {
+    background: #64748b;
+}
+
+#contact button[type="reset"]:hover {
+    background: #475569;
+}
+
+/* =========================================
+   6. FOOTER
+   ========================================= */
+footer {
+    text-align: center;
+    background: linear-gradient(135deg, #1b3b5c, #2d4e6e, #1f5e5e);
+    color: white;
+    font-size: 18px;
+    padding: 25px;
+    border-radius: 15px;
+    margin-top: 30px;
+}
+
+footer a {
+    color: #ffd966;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer a:hover {
+    transition: 0.3s;
+    color: white;
+    border-bottom: 2px solid #ffd966;
+    font-size: 19px;
+}
+
+/* =========================================
+   7. RESPONSIVE DESIGN (Media Queries)
+   ========================================= */
+@media (max-width: 600px) {
+    .navigation ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .navigation-li {
+        width: 200px;
+    }
+    #header-image {
+        width: 150px;
+        height: 150px;
+    }
+    #header h1 {
+        font-size: 24px;
+    }
+    #header h2 {
+        font-size: 18px;
+    }
+    #contact {
+        width: 100%;
+        padding: 10px;
+    }
+    #contact button {
+        width: 100%;
+        margin: 5px 0;
+    }
+    section {
+        padding: 15px;
+    }
+}
