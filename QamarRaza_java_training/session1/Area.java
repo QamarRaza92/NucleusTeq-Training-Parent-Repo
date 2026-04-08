@@ -46,5 +46,9 @@ class Area
             float height = sc.nextFloat();
             System.out.println("Area of triangle is: "+areaOfTriangle(base,height)+" square units");
         }
+        else 
+        {
+            System.out.println("Invalid Input");
+        }
     }
 }
