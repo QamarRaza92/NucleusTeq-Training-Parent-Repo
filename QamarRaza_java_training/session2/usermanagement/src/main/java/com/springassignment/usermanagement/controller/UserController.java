@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.springassignment.usermanagement.controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import com.example.demo.service.UserService;
