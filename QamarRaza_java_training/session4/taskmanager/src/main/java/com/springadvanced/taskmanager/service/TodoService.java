@@ -31,4 +31,19 @@ public class TodoService
     {
         todorepository.deleteById(id);
     }
+
+    public Todo updateTodo(Long id, Todo updatedTodo)
+    {
+        Todo existing = todorepository.findById(id).orElse(null);
+
+        if(existing != null)
+        {
+            existing.setTitle(updatedTodo.getTitle());
+            existing.setDescription(updatedTodo.getDescription());
+            existing.setStatus(updatedTodo.getStatus());
+
+            return todorepository.save(existing);
+        }
+        return null;
+    }
 }
