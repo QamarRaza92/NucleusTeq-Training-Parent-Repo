@@ -9,6 +9,7 @@ import java.util.List;
 @Service
 public class UserService
 {
+    //final attribute to handle userrepository object
     private final UserRepository userrepository;
     //Constructor injection
     public UserService(UserRepository userrepository)
