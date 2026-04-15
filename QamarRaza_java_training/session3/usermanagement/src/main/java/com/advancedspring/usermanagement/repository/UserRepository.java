@@ -10,6 +10,7 @@ import java.util.Arrays;
 @Repository
 public class UserRepository
 {
+    //All users list
     private List<User> users= new ArrayList<>(
                                         Arrays.asList
                                         (

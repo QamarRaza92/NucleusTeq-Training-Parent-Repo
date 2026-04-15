@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.http.ResponseEntity;
 import com.advancedspring.usermanagement.repository.UserRepository;
 import com.advancedspring.usermanagement.model.User;
+import java.util.List;
 
 @Service
 public class UserService
