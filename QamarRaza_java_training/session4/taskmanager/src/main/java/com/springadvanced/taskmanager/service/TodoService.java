@@ -21,4 +21,9 @@ public class TodoService
     {
         todorepository.findAll();
     }
+
+    public Todo getTodoById(Long id)
+    {
+        return todorepository.findById(id).orElse(null);
+    }
 }
