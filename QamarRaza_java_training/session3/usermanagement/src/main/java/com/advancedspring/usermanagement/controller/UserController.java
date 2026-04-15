@@ -36,7 +36,7 @@ public class UserController
     }
 
     @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable Integer id, @RequestParam(required=false) boolean confirm)
+    public String deleteUser(@PathVariable Integer id, @RequestParam(required=false) Boolean confirm)
     {
         return userservice.deleteUser(id,confirm);
     }
