@@ -2,39 +2,42 @@ package com.springadvanced.taskmanager.service;
 
 import org.springframework.stereotype.Service;
 import com.springadvanced.taskmanager.repository.TodoRepository;
+import java.util.List;
+import java.time.LocalDateTime;
+import com.springadvanced.taskmanager.entity.Todo;
 @Service 
 public class TodoService
 {
-    private final TodoRepository todorepository;
-    public TodoService(TodoRepository todorepository)
+    private final TodoRepository todoRepository;
+    public TodoService(TodoRepository todoRepository)
     {
-        this.todorepository = todorepository;
+        this.todoRepository = todoRepository;
     }
 
     public Todo createTodo(Todo todo)
     {
         todo.setCreatedAt(LocalDateTime.now());
-        return todorepository.save(todo);
+        return todoRepository.save(todo);
     }
 
     public List<Todo> getAllTodos()
     {
-        todorepository.findAll();
+        return todoRepository.findAll();
     }
 
     public Todo getTodoById(Long id)
     {
-        return todorepository.findById(id).orElse(null);
+        return todoRepository.findById(id).orElse(null);
     }
 
     public void deleteTodo(Long id)
     {
-        todorepository.deleteById(id);
+        todoRepository.deleteById(id);
     }
 
     public Todo updateTodo(Long id, Todo updatedTodo)
     {
-        Todo existing = todorepository.findById(id).orElse(null);
+        Todo existing = todoRepository.findById(id).orElse(null);
 
         if(existing != null)
         {
@@ -42,7 +45,7 @@ public class TodoService
             existing.setDescription(updatedTodo.getDescription());
             existing.setStatus(updatedTodo.getStatus());
 
-            return todorepository.save(existing);
+            return todoRepository.save(existing);
         }
         return null;
     }
