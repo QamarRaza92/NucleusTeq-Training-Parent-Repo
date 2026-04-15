@@ -9,7 +9,7 @@ public class User
     private String email;
 
     //Create public constructor to set data
-    public User(int id,String name,int age,String gender,String email)
+    public User(Integer id,String name,Integer age,String gender,String email)
     {
         this.id = id;
         this.name = name;
