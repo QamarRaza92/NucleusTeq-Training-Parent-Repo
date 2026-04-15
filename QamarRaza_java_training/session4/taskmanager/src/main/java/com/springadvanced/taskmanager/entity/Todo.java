@@ -22,7 +22,7 @@ public class Todo
     private LocalDateTime createdAt;
 
 
-    //All getter setter methods
+    //All setter methods
     public void setId(Long id)
     {
         this.id = id;
@@ -35,12 +35,34 @@ public class Todo
     {
         this.description = description;
     }
-    public void setDescription(String status)
+    public void setStatus(String status)
     {
         this.status = status;
     }
     public void setCreatedAt(LocalDateTime createdAt)
     {
         this.createdAt = createdAt;
+    }
+
+    //All getter methods
+    public Long getId()
+    {
+        return id;
+    }
+    public String getTitle()
+    {
+        return title;
+    }
+    public String getDescription()
+    {
+        return description;
+    }
+    public String getStatus()
+    {
+        return status;
+    }
+    public LocalDateTime getCreatedAt()
+    {
+        return createdAt;
     }
 }
