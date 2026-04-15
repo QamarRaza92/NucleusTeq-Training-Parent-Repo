@@ -8,6 +8,17 @@ public class TodoService
     private final TodoRepository todorepository;
     public TodoService(TodoRepository todorepository)
     {
-        
+        this.todorepository = todorepository;
+    }
+
+    public Todo createTodo(Todo todo)
+    {
+        todo.setCreatedAt(LocalDateTime.now());
+        return todorepository.save(todo);
+    }
+
+    public List<Todo> getAllTodos()
+    {
+        todorepository.findAll();
     }
 }
