@@ -1,8 +1,8 @@
 package com.springassignment.usermanagement.controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
-import com.example.demo.service.UserService;
-import com.example.demo.model.User;
+import com.springassignment.usermanagement.service.UserService;
+import com.springassignment.usermanagement.model.User;
 @RestController 
 @RequestMapping("/users")
 public class UserController

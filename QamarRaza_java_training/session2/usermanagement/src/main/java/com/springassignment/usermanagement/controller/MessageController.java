@@ -2,7 +2,7 @@ package com.springassignment.usermanagement.controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
-import com.example.demo.service.MessageService;
+import com.springassignment.usermanagement.service.MessageService;
 @RestController
 @RequestMapping("/message")
 public class MessageController
