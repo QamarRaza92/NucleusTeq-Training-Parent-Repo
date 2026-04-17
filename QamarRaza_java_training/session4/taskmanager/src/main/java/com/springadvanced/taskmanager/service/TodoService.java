@@ -5,6 +5,7 @@ import com.springadvanced.taskmanager.repository.TodoRepository;
 import java.util.List;
 import java.time.LocalDateTime;
 import com.springadvanced.taskmanager.entity.Todo;
+import com.springadvanced.taskmanager.entity.TodoStatus;
 import com.springadvanced.taskmanager.dto.TodoRequestDTO;
 import com.springadvanced.taskmanager.dto.TodoResponseDTO;
 @Service 
@@ -24,7 +25,7 @@ public class TodoService
         Todo todo = new Todo();
         todo.setTitle(dto.getTitle());
         todo.setDescription(dto.getDescription());
-        todo.setStatus("PENDING");
+        todo.setStatus(TodoStatus.PENDING);
         todo.setCreatedAt(LocalDateTime.now());
         Todo saved = todoRepository.save(todo);
         return convertToDTO(saved);

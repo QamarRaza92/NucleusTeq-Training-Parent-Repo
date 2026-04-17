@@ -35,7 +35,7 @@ public class Todo
     {
         this.description = description;
     }
-    public void setStatus(String status)
+    public void setStatus(TodoStatus status)
     {
         this.status = status;
     }
@@ -57,7 +57,7 @@ public class Todo
     {
         return description;
     }
-    public String getStatus()
+    public TodoStatus getStatus()
     {
         return status;
     }
