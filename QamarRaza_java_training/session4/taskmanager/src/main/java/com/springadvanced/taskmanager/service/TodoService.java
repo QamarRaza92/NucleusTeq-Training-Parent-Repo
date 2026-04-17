@@ -65,7 +65,7 @@ public class TodoService
 
 
 
-    //Update a tak via DTO
+    //Update a task via DTO
     public TodoResponseDTO updateTodo(Long id, TodoRequestDTO  dto)
     {
         Todo existing = todoRepository.findById(id).orElse(null);
@@ -78,6 +78,30 @@ public class TodoService
             Todo updated = todoRepository.save(existing);
             return convertToDTO(updated);
         }
+        return null;
+    }
+
+
+    //Toggle task status
+    public TodoResponseDTO toggleStatus(Long id)
+    {
+        Todo existing = todoRepository.findById(id).orElse(null);
+
+        if(existing != null)
+        {
+            if(existing.getStatus() == TodoStatus.PENDING)
+            {
+                existing.setStatus(TodoStatus.COMPLETED);
+            }
+            else
+            {
+                existing.setStatus(TodoStatus.PENDING);
+            }
+
+            Todo updated = todoRepository.save(existing);
+            return convertToDTO(updated);
+        }
+
         return null;
     }
 }

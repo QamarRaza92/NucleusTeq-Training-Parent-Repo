@@ -41,8 +41,14 @@ public class TodoController
     }
 
     @PutMapping("/{id}")
-    public TodoResponseDTO updateTodo(@PathVariable Long id, @RequestBody @Valid odoRequestDTO dto)
+    public TodoResponseDTO updateTodo(@PathVariable Long id, @RequestBody @Valid TodoRequestDTO dto)
     {
         return todoService.updateTodo(id,dto);
+    }
+
+    @PutMapping("/{id}/status")
+    public TodoResponseDTO toggleStatus(@PathVariable Long id)
+    {
+        return todoService.toggleStatus(id);
     }
 }
