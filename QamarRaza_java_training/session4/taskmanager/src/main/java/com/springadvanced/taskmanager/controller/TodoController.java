@@ -2,7 +2,8 @@ package com.springadvanced.taskmanager.controller;
 
 import org.springframework.web.bind.annotation.*;
 import com.springadvanced.taskmanager.service.TodoService;
-import com.springadvanced.taskmanager.entity.Todo;
+import com.springadvanced.taskmanager.dto.TodoRequestDTO;
+import com.springadvanced.taskmanager.dto.TodoResponseDTO;
 import java.util.List;
 @RestController
 @RequestMapping("/todos")
@@ -15,21 +16,21 @@ public class TodoController
     }
 
     @GetMapping
-    public List<Todo> getAllTodos()
+    public List<TodoResponseDTO> getAllTodos()
     {
         return todoService.getAllTodos();
     }
 
     @GetMapping("/{id}")
-    public Todo getTodoById(@PathVariable Long id)
+    public TodoResponseDTO getTodoById(@PathVariable Long id)
     {
         return todoService.getTodoById(id);
     }
 
     @PostMapping
-    public Todo createTodo(@RequestBody Todo todo)
+    public TodoResponseDTO createTodo(@RequestBody TodoRequestDTO dto)
     {
-        return todoService.createTodo(todo);
+        return todoService.createTodo(dto);
     }
 
     @DeleteMapping("/{id}")
@@ -39,8 +40,8 @@ public class TodoController
     }
 
     @PutMapping("/{id}")
-    public Todo updateTodo(@PathVariable Long id, @RequestBody Todo todo)
+    public TodoResponseDTO updateTodo(@PathVariable Long id, @RequestBody TodoRequestDTO dto)
     {
-        return todoService.updateTodo(id,todo);
+        return todoService.updateTodo(id,dto);
     }
 }
