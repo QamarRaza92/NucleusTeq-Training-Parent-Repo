@@ -17,7 +17,7 @@ public class Todo
     private Long id;
     private String title;
     private String description;
-    private String status;
+    private TodoStatus status;
 
     private LocalDateTime createdAt;
 
