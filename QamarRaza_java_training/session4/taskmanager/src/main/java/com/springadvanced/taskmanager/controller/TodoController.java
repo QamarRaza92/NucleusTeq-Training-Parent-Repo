@@ -5,6 +5,7 @@ import com.springadvanced.taskmanager.service.TodoService;
 import com.springadvanced.taskmanager.dto.TodoRequestDTO;
 import com.springadvanced.taskmanager.dto.TodoResponseDTO;
 import java.util.List;
+import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/todos")
 public class TodoController
@@ -28,7 +29,7 @@ public class TodoController
     }
 
     @PostMapping
-    public TodoResponseDTO createTodo(@RequestBody TodoRequestDTO dto)
+    public TodoResponseDTO createTodo(@RequestBody @Valid TodoRequestDTO dto)
     {
         return todoService.createTodo(dto);
     }
@@ -40,7 +41,7 @@ public class TodoController
     }
 
     @PutMapping("/{id}")
-    public TodoResponseDTO updateTodo(@PathVariable Long id, @RequestBody TodoRequestDTO dto)
+    public TodoResponseDTO updateTodo(@PathVariable Long id, @RequestBody @Valid odoRequestDTO dto)
     {
         return todoService.updateTodo(id,dto);
     }
