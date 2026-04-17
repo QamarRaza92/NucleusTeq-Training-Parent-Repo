@@ -1,10 +1,15 @@
 package com.springadvanced.taskmanager.dto;
+import com.springadvanced.taskmanager.entity.TodoStatus;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 public class TodoResponseDTO
 {
     private Long id;
     private String title;
-    private String status;
+    
+    @Enumerated(EnumType.STRING)
+    private TodoStatus status;
 
     //Getter methods
     public Long getId()
@@ -15,7 +20,7 @@ public class TodoResponseDTO
     {
         return title;
     }
-    public String getStatus()
+    public TodoStatus getStatus()
     {
         return status;
     }
@@ -29,7 +34,7 @@ public class TodoResponseDTO
     {
         this.title = title;
     }
-    public void setStatus(String status)
+    public void setStatus(TodoStatus status)
     {
         this.status = status;
     }

@@ -4,8 +4,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 public class TodoRequestDTO
 {
-    @NotNull(message = "Title cannot be null");
-    @Size(min=3,message="Title length must be 3 characters or more");
+    @NotNull(message = "Title cannot be null")
+    @Size(min=3,message="Title length must be 3 characters or more")
     private String title;
     private String description;
 
