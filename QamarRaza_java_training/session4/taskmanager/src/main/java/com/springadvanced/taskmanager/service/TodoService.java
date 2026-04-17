@@ -52,7 +52,14 @@ public class TodoService
     public TodoResponseDTO getTodoById(Long id)
     {
         Todo todo = todoRepository.findById(id).orElse(null);
-        return (todo != null) ? convertToDTO(todo):null;
+        if(todo == null)
+        {
+             throw new RuntimeException("Task not found");
+        }
+        else
+        {
+            return convertToDTO(todo);
+        }
     }
 
 
@@ -78,7 +85,10 @@ public class TodoService
             Todo updated = todoRepository.save(existing);
             return convertToDTO(updated);
         }
-        return null;
+        else
+        {
+            throw new RuntimeException("Task not found!!");
+        }
     }
 
 
@@ -102,6 +112,9 @@ public class TodoService
             return convertToDTO(updated);
         }
 
-        return null;
+        else
+        {
+            throw new RuntimeException("Task not found");
+        }
     }
 }

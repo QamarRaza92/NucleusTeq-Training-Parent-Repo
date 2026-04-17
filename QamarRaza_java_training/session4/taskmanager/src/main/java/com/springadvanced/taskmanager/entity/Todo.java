@@ -5,7 +5,8 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,6 +18,7 @@ public class Todo
     private Long id;
     private String title;
     private String description;
+    @Enumerated(EnumType.STRING)
     private TodoStatus status;
 
     private LocalDateTime createdAt;

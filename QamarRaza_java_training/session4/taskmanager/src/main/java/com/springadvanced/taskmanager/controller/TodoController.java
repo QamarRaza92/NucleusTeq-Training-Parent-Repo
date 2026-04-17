@@ -46,7 +46,7 @@ public class TodoController
         return todoService.updateTodo(id,dto);
     }
 
-    @PutMapping("/{id}/status")
+    @PatchMapping("/{id}/status")
     public TodoResponseDTO toggleStatus(@PathVariable Long id)
     {
         return todoService.toggleStatus(id);
