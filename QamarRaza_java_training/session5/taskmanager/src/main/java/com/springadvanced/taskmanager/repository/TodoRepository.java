@@ -1,4 +1,4 @@
-com.springadvanced.taskmanager.repository;
+package com.springadvanced.taskmanager.repository;
 
 import com.springadvanced.taskmanager.entity.TodoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
