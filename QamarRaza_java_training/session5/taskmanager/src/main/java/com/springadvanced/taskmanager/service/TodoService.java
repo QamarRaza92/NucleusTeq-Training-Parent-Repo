@@ -67,7 +67,14 @@ public class TodoService
     //Delete a task via DTO
     public void deleteTodo(Long id)
     {
-        todoRepository.deleteById(id);
+        if(!todoRepository.existsById(id))
+        {
+            throw new TodoNotFoundException(id);
+        }
+        else
+        {
+            todoRepository.deleteById(id);
+        }
     }
 
 
@@ -114,7 +121,7 @@ public class TodoService
 
         else
         {
-            throw new TodoNotFoundException();
+            throw new TodoNotFoundException(id);
         }
     }
 

@@ -6,14 +6,13 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
-import jakarta.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 
 @ControllerAdvice
-public class GlobalExceptionHanlder
+public class GlobalExceptionHandler
 {
     //1. Handling the custom exception
-    @ExceptionHanlder(TodoNotFoundException.class)
+    @ExceptionHandler(TodoNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleCustomException(TodoNotFoundException ex, WebRequest request)
     {
         ErrorResponse error = new ErrorResponse(HttpStatus.NOT_FOUND.value(), 
