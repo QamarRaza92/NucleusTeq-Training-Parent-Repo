@@ -12,7 +12,7 @@ public class ErrorResponse
     public ErrorResponse(int status,String message, String path)
     {
         this.status = status;
-        this.message = message;
+        this.message = message; 
         this.timestamp = LocalDateTime.now();
         this.path = path;
     }
