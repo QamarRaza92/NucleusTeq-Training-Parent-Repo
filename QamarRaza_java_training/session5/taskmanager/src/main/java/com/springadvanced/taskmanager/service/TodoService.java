@@ -8,6 +8,7 @@ import com.springadvanced.taskmanager.entity.TodoEntity;
 import com.springadvanced.taskmanager.entity.TodoStatus;
 import com.springadvanced.taskmanager.dto.TodoRequestDTO;
 import com.springadvanced.taskmanager.dto.TodoResponseDTO;
+import com.springadvanced.taskmanager.exception.TodoNotFoundException;
 
 @Service
 public class TodoService 
@@ -40,7 +41,7 @@ public class TodoService
         TodoEntity todo = todoRepository.findById(id).orElse(null);
         if(todo==null)
         {
-            throw new RuntimeException("Can not find Todo");
+            throw new TodoNotFoundException(id);
         }
         else
         {
@@ -62,7 +63,7 @@ public class TodoService
         return convertToDTO(saved);
     }
 
-    
+
     //Delete a task via DTO
     public void deleteTodo(Long id)
     {
@@ -86,7 +87,7 @@ public class TodoService
         }
         else
         {
-            throw new RuntimeException("Task not found!!");
+            throw new TodoNotFoundException(id);
         }
     }
 
@@ -113,7 +114,7 @@ public class TodoService
 
         else
         {
-            throw new RuntimeException("Task not found");
+            throw new TodoNotFoundException();
         }
     }
 
