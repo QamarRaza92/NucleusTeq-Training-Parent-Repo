@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 @RequestMapping("/todos")
 public class TodoController
 {
-    private static final Logger log = LoggerFactory.getLogger(TodoController);
+    private static final Logger log = LoggerFactory.getLogger(TodoController.class);
     private final TodoService todoService;
     public TodoController(TodoService todoService)
     {

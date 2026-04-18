@@ -9,10 +9,13 @@ import com.springadvanced.taskmanager.entity.TodoStatus;
 import com.springadvanced.taskmanager.dto.TodoRequestDTO;
 import com.springadvanced.taskmanager.dto.TodoResponseDTO;
 import com.springadvanced.taskmanager.exception.TodoNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class TodoService 
 {
+    private static final Logger log = LoggerFactory.getLogger(TodoService.class);
     private final TodoRepository todoRepository;
     public TodoService(TodoRepository todoRepository)
     {
@@ -41,10 +44,12 @@ public class TodoService
         TodoEntity todo = todoRepository.findById(id).orElse(null);
         if(todo==null)
         {
+            log.warn("Cannot find Todo: {}",id);
             throw new TodoNotFoundException(id);
         }
         else
         {
+            log.info("Fetching Todo: {}",id);
             return convertToDTO(todo);
         }
     }
@@ -60,6 +65,7 @@ public class TodoService
         todo.setCreatedAt(LocalDateTime.now());
 
         TodoEntity saved = todoRepository.save(todo);
+        log.info("New Todo with id:{} and title:'{}' created",saved.getId(),saved.getTitle());
         return convertToDTO(saved);
     }
 
@@ -69,11 +75,13 @@ public class TodoService
     {
         if(!todoRepository.existsById(id))
         {
+            log.warn("Todo: {} does not exist",id);
             throw new TodoNotFoundException(id);
         }
         else
         {
             todoRepository.deleteById(id);
+            log.info("Deleted Todo: {}",id);
         }
     }
 
@@ -90,10 +98,12 @@ public class TodoService
             existing.setDescription(dto.getDescription());
             
             TodoEntity updated = todoRepository.save(existing);
+            log.info("Updated Todo: {}",id);
             return convertToDTO(updated);
         }
         else
         {
+            log.warn("Todo: {} not found",id);
             throw new TodoNotFoundException(id);
         }
     }
@@ -116,14 +126,14 @@ public class TodoService
             }
 
             TodoEntity updated = todoRepository.save(existing);
+            log.info("Updated Todo: {}'s status",id);
             return convertToDTO(updated);
         }
 
         else
         {
+            log.info("Todo: {} not found",id);
             throw new TodoNotFoundException(id);
         }
     }
-
-
 }
