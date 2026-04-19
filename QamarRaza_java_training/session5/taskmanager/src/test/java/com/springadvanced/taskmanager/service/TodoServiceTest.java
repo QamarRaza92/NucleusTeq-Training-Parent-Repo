@@ -203,4 +203,102 @@ public  class TodoServiceTest
         verify(todoRepository,never()).save(any(TodoEntity.class));
         System.out.println("'Update todo when does not exist' Test successful");
     }
+
+    @Test 
+    void toggleStatus_WhenExistsAndStatusIsPENDING_ShouldToggleToCOMPLETED()
+    {
+        // ARRANGE
+        Long todoId = 1L;
+        
+        // Existing todo (PENDING)
+        TodoEntity existingTodo = new TodoEntity();
+        existingTodo.setId(todoId);
+        existingTodo.setTitle("Test Todo");
+        existingTodo.setDescription("Test Description");
+        existingTodo.setStatus(TodoStatus.PENDING);
+        
+        // Updated todo (COMPLETED)
+        TodoEntity updatedTodo = new TodoEntity();
+        updatedTodo.setId(todoId);
+        updatedTodo.setTitle("Test Todo");
+        updatedTodo.setDescription("Test Description");
+        updatedTodo.setStatus(TodoStatus.COMPLETED);
+        
+        // Mock behaviour
+        when(todoRepository.findById(todoId)).thenReturn(Optional.of(existingTodo));
+        when(todoRepository.save(any(TodoEntity.class))).thenReturn(updatedTodo);
+        
+        // ACT
+        TodoResponseDTO result = todoService.toggleStatus(todoId);
+        
+        // ASSERT
+        assertNotNull(result);
+        assertEquals(todoId, result.getId());
+        assertEquals(TodoStatus.COMPLETED, result.getStatus());
+        
+        // VERIFY
+        verify(todoRepository, times(1)).findById(todoId);
+        verify(todoRepository, times(1)).save(any(TodoEntity.class));
+        System.out.println("'Toggle Todo Status from PENDING to COMPLETED when Todo exists' Test successful");
+    }
+    
+    // Test 2: COMPLETED → PENDING
+    @Test 
+    void toggleStatus_WhenExistsAndStatusIsCOMPLETED_ShouldToggleToPENDING()
+    {
+        // ARRANGE
+        Long todoId = 1L;
+        
+        // Existing todo (COMPLETED)
+        TodoEntity existingTodo = new TodoEntity();
+        existingTodo.setId(todoId);
+        existingTodo.setTitle("Test Todo");
+        existingTodo.setDescription("Test Description");
+        existingTodo.setStatus(TodoStatus.COMPLETED);
+        
+        // Updated todo (PENDING)
+        TodoEntity updatedTodo = new TodoEntity();
+        updatedTodo.setId(todoId);
+        updatedTodo.setTitle("Test Todo");
+        updatedTodo.setDescription("Test Description");
+        updatedTodo.setStatus(TodoStatus.PENDING);
+        
+        // Mock behaviour
+        when(todoRepository.findById(todoId)).thenReturn(Optional.of(existingTodo));
+        when(todoRepository.save(any(TodoEntity.class))).thenReturn(updatedTodo);
+        
+        // ACT
+        TodoResponseDTO result = todoService.toggleStatus(todoId);
+        
+        // ASSERT
+        assertNotNull(result);
+        assertEquals(todoId, result.getId());
+        assertEquals(TodoStatus.PENDING, result.getStatus());
+        
+        // VERIFY
+        verify(todoRepository, times(1)).findById(todoId);
+        verify(todoRepository, times(1)).save(any(TodoEntity.class));
+        System.out.println("'Toggle Todo Status from COMPLETED to PENDING when Todo exists' Test successful");
+    }
+    
+    // Test 3: Todo not found
+    @Test
+    void toggleStatus_WhenNotFound_ShouldThrowTodoNotFoundException()
+    {
+        // ARRANGE
+        Long todoId = 99L;
+        
+        // Mock behaviour - empty return
+        when(todoRepository.findById(todoId)).thenReturn(Optional.empty());
+        
+        // ACT & ASSERT
+        assertThrows(TodoNotFoundException.class, () -> {
+            todoService.toggleStatus(todoId);
+        });
+        
+        // VERIFY
+        verify(todoRepository, times(1)).findById(todoId);
+        verify(todoRepository, never()).save(any(TodoEntity.class));
+        System.out.println("'Toggle Todo Status when Todo Not Found' Test successful");
+    }
 }
