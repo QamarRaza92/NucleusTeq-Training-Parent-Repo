@@ -17,9 +17,11 @@ public class TodoService
 {
     private static final Logger log = LoggerFactory.getLogger(TodoService.class);
     private final TodoRepository todoRepository;
-    public TodoService(TodoRepository todoRepository)
+    private final NotificationServiceClient notify;
+    public TodoService(TodoRepository todoRepository,NotificationServiceClient notify)
     {
         this.todoRepository = todoRepository;
+        this.notify = notify;
     }
 
     //Convert TodoEntity to TodoResponseDTO
@@ -66,6 +68,7 @@ public class TodoService
 
         TodoEntity saved = todoRepository.save(todo);
         log.info("New Todo with id:{} and title:'{}' created",saved.getId(),saved.getTitle());
+        notify.sendNotification("Created new Todo with id:"+saved.getId());
         return convertToDTO(saved);
     }
 
