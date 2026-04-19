@@ -67,4 +67,41 @@ public  class TodoServiceTest
         verify(todoRepository,times(1)).findById(todoId);
         System.out.println("'Id Not Found' Test successfull");
     }
+
+    @Test
+    public void createTodo_ShouldCreate_NewTodo()
+    {
+        // Create mock data
+        TodoRequestDTO dto = new TodoRequestDTO();
+        dto.setTitle("New Task");
+        dto.setDescription("Testing insertion of new task");
+
+        TodoEntity entityToSave = new TodoEntity();
+        entityToSave.setTitle("New Task");
+        entityToSave.setDescription("Testing insertion of new task");
+        entityToSave.setStatus(TodoStatus.PENDING);
+
+        TodoEntity savedEntity = new TodoEntity();
+        savedEntity.setId(1L);
+        savedEntity.setTitle("New Task");
+        savedEntity.setDescription("Testing insertion of new task");
+        savedEntity.setStatus(TodoStatus.PENDING);
+        savedEntity.setCreatedAt(LocalDateTime.now());
+
+        //Define behaviour
+        when(todoRepository.save(any(TodoEntity.class))).thenReturn(savedEntity);
+
+        //Act
+        TodoResponseDTO result = todoService.createTodo(dto);
+
+        //Assert
+        assertNotNull(result);
+        assertEquals(1L, result.getId());
+        assertEquals("New Task", result.getTitle());
+        assertEquals(TodoStatus.PENDING, result.getStatus());
+
+        //Verify
+        verify(todoRepository,times(1)).save(any(TodoEntity.class));
+        System.out.println("'New Todo creation' Test successful");
+    }
 }
