@@ -143,4 +143,64 @@ public  class TodoServiceTest
         verify(todoRepository, never()).deleteById(anyLong());
         System.out.println("'New Todo deletion when not exists' Test successful");
     }
+
+    @Test
+    void updateTodo_WhenTodoExists_ShouldUpdate_AndReturnTodo()
+    {
+        //ARRANGE
+        Long todoId = 1L;
+        TodoRequestDTO newDTO = new TodoRequestDTO();
+        newDTO.setTitle("Updated Title");
+        newDTO.setDescription("Updated description");
+
+        TodoEntity existing = new TodoEntity();
+        existing.setId(todoId);
+        existing.setTitle("Old Title");
+        existing.setDescription("Old description");
+        existing.setStatus(TodoStatus.PENDING);
+
+        TodoEntity updatedEntity = new TodoEntity();
+        updatedEntity.setId(todoId);
+        updatedEntity.setTitle("Updated Title");
+        updatedEntity.setDescription("Updated description");
+        updatedEntity.setStatus(TodoStatus.PENDING);
+        
+        //Define behaviour 
+        when(todoRepository.findById(todoId)).thenReturn(Optional.of(existing));
+        when(todoRepository.save(any(TodoEntity.class))).thenReturn(updatedEntity);
+
+        //Act
+        TodoResponseDTO result = todoService.updateTodo(todoId,newDTO);
+
+        //Assert 
+        assertNotNull(result);
+        assertEquals(todoId,result.getId());
+        assertEquals("Updated Title",result.getTitle());
+        assertEquals(TodoStatus.PENDING,result.getStatus());
+
+        //verify - It should update and existing todo 
+        verify(todoRepository,times(1)).findById(todoId);
+        verify(todoRepository,times(1)).save(any(TodoEntity.class));
+        System.out.println("'Update TODO When Exists' Test successful");
+    }
+
+    @Test 
+    public void updateTodo_WhenTodoDoesNotExist_ShouldThrowException()
+    {
+        //Create Data
+        Long todoId = 99L;
+        TodoRequestDTO newDTO = new TodoRequestDTO();
+
+
+        //Define Behaviour 
+        when(todoRepository.findById(todoId)).thenReturn(Optional.empty());
+
+        //Act and Assert
+        assertThrows(TodoNotFoundException.class,() -> {todoService.updateTodo(todoId,newDTO);});
+
+        //Verify 
+        verify(todoRepository,times(1)).findById(todoId);
+        verify(todoRepository,never()).save(any(TodoEntity.class));
+        System.out.println("'Update todo when does not exist' Test successful");
+    }
 }
