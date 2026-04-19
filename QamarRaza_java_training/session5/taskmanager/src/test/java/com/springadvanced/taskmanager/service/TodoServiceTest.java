@@ -104,4 +104,43 @@ public  class TodoServiceTest
         verify(todoRepository,times(1)).save(any(TodoEntity.class));
         System.out.println("'New Todo creation' Test successful");
     }
+
+
+    @Test
+    public void deleteTodo_ShouldDelete_WhenExists()
+    {
+        //Create data
+        Long todoId = 1L;
+
+        //Define behaviour
+        when(todoRepository.existsById(todoId)).thenReturn(true);
+        doNothing().when(todoRepository).deleteById(todoId);
+
+        //Act
+        todoService.deleteTodo(todoId);
+
+        //Verify
+        verify(todoRepository,times(1)).deleteById(todoId);
+        verify(todoRepository,times(1)).existsById(todoId);
+        System.out.println("'New Todo deletion when todo exists' Test successful");
+    }
+
+    @Test
+    void deleteTodo_WhenNotExists_ShouldThrowException()
+    {
+        // ARRANGE
+        Long todoId = 99L;
+
+        //Define behaviour
+        when(todoRepository.existsById(todoId)).thenReturn(false);
+
+        // ACT & ASSERT
+        assertThrows(TodoNotFoundException.class, () -> {
+            todoService.deleteTodo(todoId);
+        });
+
+        // VERIFY - deleteById kabhi call nahi hona chahiye
+        verify(todoRepository, never()).deleteById(anyLong());
+        System.out.println("'New Todo deletion when not exists' Test successful");
+    }
 }
