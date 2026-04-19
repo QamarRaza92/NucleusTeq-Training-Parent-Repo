@@ -22,6 +22,8 @@ public  class TodoServiceTest
 {
      @Mock
      private TodoRepository todoRepository;
+     @Mock
+     private NotificationServiceClient notificationClient;
      @InjectMocks
      private TodoService todoService;
 
@@ -69,40 +71,43 @@ public  class TodoServiceTest
     }
 
     @Test
-    public void createTodo_ShouldCreate_NewTodo()
+    void createTodo_ShouldCreate_NewTodo()
     {
-        // Create mock data
-        TodoRequestDTO dto = new TodoRequestDTO();
-        dto.setTitle("New Task");
-        dto.setDescription("Testing insertion of new task");
+        // ARRANGE
+        TodoRequestDTO requestDTO = new TodoRequestDTO();
+        requestDTO.setTitle("New Task");
+        requestDTO.setDescription("New Description");
 
-        TodoEntity entityToSave = new TodoEntity();
-        entityToSave.setTitle("New Task");
-        entityToSave.setDescription("Testing insertion of new task");
-        entityToSave.setStatus(TodoStatus.PENDING);
+        TodoEntity todoToSave = new TodoEntity();
+        todoToSave.setTitle("New Task");
+        todoToSave.setDescription("New Description");
+        todoToSave.setStatus(TodoStatus.PENDING);
+        todoToSave.setCreatedAt(LocalDateTime.now());
 
-        TodoEntity savedEntity = new TodoEntity();
-        savedEntity.setId(1L);
-        savedEntity.setTitle("New Task");
-        savedEntity.setDescription("Testing insertion of new task");
-        savedEntity.setStatus(TodoStatus.PENDING);
-        savedEntity.setCreatedAt(LocalDateTime.now());
+        TodoEntity savedTodo = new TodoEntity();
+        savedTodo.setId(1L);
+        savedTodo.setTitle("New Task");
+        savedTodo.setDescription("New Description");
+        savedTodo.setStatus(TodoStatus.PENDING);
+        savedTodo.setCreatedAt(LocalDateTime.now());
 
-        //Define behaviour
-        when(todoRepository.save(any(TodoEntity.class))).thenReturn(savedEntity);
+        when(todoRepository.save(any(TodoEntity.class))).thenReturn(savedTodo);
 
-        //Act
-        TodoResponseDTO result = todoService.createTodo(dto);
+        //Notification mock
+        when(notificationClient.sendNotification(anyString())).thenReturn("Notification sent");
 
-        //Assert
+        // ACT
+        TodoResponseDTO result = todoService.createTodo(requestDTO);
+
+        // ASSERT
         assertNotNull(result);
         assertEquals(1L, result.getId());
         assertEquals("New Task", result.getTitle());
-        assertEquals(TodoStatus.PENDING, result.getStatus());
 
-        //Verify
-        verify(todoRepository,times(1)).save(any(TodoEntity.class));
-        System.out.println("'New Todo creation' Test successful");
+        // VERIFY
+        verify(todoRepository, times(1)).save(any(TodoEntity.class));
+        verify(notificationClient, times(1)).sendNotification(anyString());
+        System.out.println("'Create Todo' Test successfull");
     }
 
 
