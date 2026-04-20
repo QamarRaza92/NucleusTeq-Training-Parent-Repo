@@ -12,6 +12,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,6 +48,35 @@ public  class TodoServiceTest
          assertEquals(TodoStatus.PENDING, converted.getStatus());
 
          System.out.println("'convert to DTO' Test successfull");
+     }
+
+     @Test
+     public void getAllTodos_ShouldReturnAllTodos()
+     {
+         //data
+         List<TodoEntity> todos = new ArrayList<>();
+         TodoEntity todo1 = new TodoEntity();
+         todo1.setId(1L);
+         todo1.setTitle("Test");
+         todo1.setStatus(TodoStatus.PENDING);
+
+         todos.add(todo1);
+
+        //behavior
+         when(todoRepository.findAll().stream().toList()).thenReturn(todos);
+
+
+         //act
+         List<TodoResponseDTO> result = todoService.getAllTodos();
+
+         //assert
+         assertEquals(todos.get(0).getTitle(), result.get(0).getTitle());
+         assertEquals(todos.get(0).getId(), result.get(0).getId());
+
+         //verify
+         verify(todoRepository, times(1)).findAll();
+
+         System.out.println("'GetAllTodos' Test successfull");
      }
 
     @Test
