@@ -27,6 +27,27 @@ public  class TodoServiceTest
      @InjectMocks
      private TodoService todoService;
 
+     @Test
+     public void convertToDTO_ShouldCovertTodoEntityIntoTodoResponseDTO()
+     {
+         //act
+         TodoEntity todo = new TodoEntity();
+         todo.setId(1L);
+         todo.setTitle("Test");
+         todo.setStatus(TodoStatus.PENDING);
+         todo.setDescription("test description");
+
+         //Act
+         TodoResponseDTO converted = todoService.convertToDTO(todo);
+
+         //Assert
+         assertEquals(1L, converted.getId());
+         assertEquals("Test", converted.getTitle());
+         assertEquals(TodoStatus.PENDING, converted.getStatus());
+
+         System.out.println("'convert to DTO' Test successfull");
+     }
+
     @Test
     public void getTodoById_ShouldReturnValidTodo_WhenExists()
     {
