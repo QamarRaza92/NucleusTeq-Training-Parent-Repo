@@ -5,7 +5,6 @@ import com.springadvanced.taskmanager.dto.TodoResponseDTO;
 import com.springadvanced.taskmanager.service.TodoService;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
-// import com.springadvanced.taskmanager.service.NotificationServiceClient;
 import com.springadvanced.taskmanager.exception.GlobalExceptionHandler;
 import com.springadvanced.taskmanager.exception.TodoNotFoundException;
 import java.util.List;
