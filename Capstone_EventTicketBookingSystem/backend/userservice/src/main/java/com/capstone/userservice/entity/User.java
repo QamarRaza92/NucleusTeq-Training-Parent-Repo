@@ -43,7 +43,7 @@ public class User
     
     //email
     public String getEmail(){return email;}
-    public void setEmail(String id){this.email = email;}
+    public void setEmail(email){this.email = email;}
 
     //password
     public String getPassword(){return password;}
@@ -54,6 +54,6 @@ public class User
     public void setPhone(String phone){this.phone = phone;}
     
     //role
-    public Long getId(){return role;}
+    public Role getRole(){return role;}
     public void setRole(Role role){this.role = role;}
 }
