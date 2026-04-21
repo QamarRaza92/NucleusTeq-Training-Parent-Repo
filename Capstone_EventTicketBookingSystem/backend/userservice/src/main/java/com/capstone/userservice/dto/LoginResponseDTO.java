@@ -1,6 +1,6 @@
 package com.capstone.userservice.dto;
 
-public class LoginResponse
+public class LoginResponseDTO
 {
     private String token;
     private String email;

@@ -4,11 +4,11 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity 
-@Table(name='users')
+@Table(name="users")
 public class User
 {
     @Id 
-    @GeneratedValue(strategy = GenerationType.IDENTITY);
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable=false)
@@ -43,7 +43,7 @@ public class User
     
     //email
     public String getEmail(){return email;}
-    public void setEmail(email){this.email = email;}
+    public void setEmail(String email){this.email = email;}
 
     //password
     public String getPassword(){return password;}

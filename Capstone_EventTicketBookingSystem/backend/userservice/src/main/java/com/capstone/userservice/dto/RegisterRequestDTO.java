@@ -1,6 +1,6 @@
 package com.capstone.userservice.dto;
 
-public class RegisterRequest
+public class RegisterRequestDTO
 {
     private String name;
     private String email;
