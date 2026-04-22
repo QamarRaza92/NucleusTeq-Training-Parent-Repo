@@ -76,9 +76,15 @@ public class AuthController
         {
             user.setRole(User.Role.ORGANIZER);
         }
-        else
+        else if(request.getRole().equalsIgnoreCase("CUSTOMER"))
         {
             user.setRole(User.Role.CUSTOMER);
+        }
+        else
+        {
+            Map<String,String> response = new HashMap<>();
+            response.put("error","Invalid role! Use CUSTOMER or ORGANIZER");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
         userRepository.save(user);

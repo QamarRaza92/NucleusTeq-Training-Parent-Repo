@@ -36,13 +36,13 @@ public class JwtUtil
 
     public String extractEmail(String token)
     {
-        Claims claims = Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token).getBody();
+        Claims claims = Jwts.parser().setSigningKey(getSigningKey()).build().parseClaimsJws(token).getBody();
         return claims.getSubject();
     }
 
     public String extractRole(String token)
     {
-        Claims claims = Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token).getBody();
+        Claims claims = Jwts.parser().setSigningKey(getSigningKey()).build().parseClaimsJws(token).getBody();
         return claims.get("role",String.class);
     }
 
@@ -50,7 +50,7 @@ public class JwtUtil
     {
         try
         {
-            Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token);
+            Jwts.parser().setSigningKey(getSigningKey()).build().parseClaimsJws(token);
             return true;
         }
         catch(Exception e)
