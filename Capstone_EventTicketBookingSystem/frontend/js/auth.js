@@ -29,6 +29,30 @@ if(closeBtn)
                               );
 }
 
+function isValidName(name) {
+    const nameRegex = /^[A-Za-z]{2,}$/;
+    if (!nameRegex.test(name)) {
+        return { valid: false, message: "Name must contain only alphabets and be at least 2 characters" };
+    }
+    return { valid: true, message: "" };
+}
+
+function isValidEmail(email) {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    if (!emailRegex.test(email)) {
+        return { valid: false, message: "Email must be in format: username@gmail.com" };
+    }
+    return { valid: true, message: "" };
+}
+
+function isValidPhone(phone) {
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(phone)) {
+        return { valid: false, message: "Phone number must be exactly 10 digits" };
+    }
+    return { valid: true, message: "" };
+}
+
 function isValidPassword(password)
 {
     if (password.length<8 || password.length>12)
@@ -70,6 +94,25 @@ if(document.getElementById("registerForm"))
                                                 showError(passwordCheck.message);
                                                 return;
                                             }
+
+                                            const nameCheck = isValidName(name);
+                                            if (!nameCheck.valid) {
+                                                showError(nameCheck.message);
+                                                return;
+                                            }
+
+                                            const emailCheck = isValidEmail(email);
+                                            if (!emailCheck.valid) {
+                                                showError(emailCheck.message);
+                                                return;
+                                            }
+
+                                            const phoneCheck = isValidPhone(phone);
+                                            if (!phoneCheck.valid) {
+                                                showError(phoneCheck.message);
+                                                return;
+                                            }
+
                                             try 
                                             {
                                                 const response = await fetch(

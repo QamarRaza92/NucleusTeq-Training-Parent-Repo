@@ -57,7 +57,7 @@ public class AuthController
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequestDTO request)
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequestDTO request)
     {
         if (userRepository.existsByEmail(request.getEmail()))
         {
