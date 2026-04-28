@@ -23,21 +23,6 @@ body {
     box-shadow: 0 25px 40px -12px rgba(139, 92, 246, 0.2);
 }
 
-/* .back-btn {
-    background: none;
-    border: none;
-    color: #a78bfa;
-    cursor: pointer;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    transition: 0.2s;
-}
-
-.back-btn:hover {
-    color: #c4b5fd;
-    transform: translateX(-4px);
-} */
-
 .header h1 {
     font-size: 2rem;
     font-weight: 700;
@@ -159,7 +144,6 @@ body {
 }
 h3{color:white;}
 
-/* Animations */
 @keyframes fadeSlideUp {
     from {
         opacity: 0;

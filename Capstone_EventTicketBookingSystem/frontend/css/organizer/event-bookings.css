@@ -15,7 +15,6 @@
     border-color: #9cae29f4;
 }
 
-/* Header */
 .bookings-header {
     display: flex;
     justify-content: space-between;
@@ -29,7 +28,6 @@
     color: #ffffff;
 }
 
-/* Back link */
 .back-link {
     color: #8b5cf6;
     text-decoration: none;
@@ -40,7 +38,6 @@
     text-decoration: underline;
 }
 
-/* Event Info */
 .event-info {
     background: #1a1a1a;
     border-radius: 12px;
@@ -59,7 +56,6 @@
     margin: 5px 0;
 }
 
-/* Enhanced Event Card */
 .event-details-card {
     background: linear-gradient(145deg, #1e1e1e, #141414);
     border: 1px solid #333;
@@ -86,7 +82,6 @@
     color: #ffffff;
 }
 
-/* Table */
 .bookings-list {
     margin-top: 20px;
     overflow-x: auto;
@@ -117,12 +112,10 @@ th {
     letter-spacing: 1px;
 }
 
-/* Row hover */
 tr:hover {
     background: #1a1a1a;
 }
 
-/* Status Badge */
 .status-badge {
     background: rgba(139, 92, 246, 0.15);
     color: #a78bfa;
@@ -132,7 +125,6 @@ tr:hover {
     font-weight: 500;
 }
 
-/* Empty State */
 .empty-state {
     text-align: center;
     padding: 40px;
