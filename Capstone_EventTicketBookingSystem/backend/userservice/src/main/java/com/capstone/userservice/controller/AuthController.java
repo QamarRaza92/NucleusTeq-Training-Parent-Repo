@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,12 +46,13 @@ public class AuthController
         User user = userRepository.findByEmail(request.getEmail())
         .orElseThrow(()-> new RuntimeException("User not found"));
 
-        String token = jwtUtil.generateToken(user.getEmail(),user.getRole().name());
+        String token = jwtUtil.generateToken(user.getEmail(),user.getRole().name(),user.getId());
 
         LoginResponseDTO response = new LoginResponseDTO();
         response.setToken(token);
         response.setEmail(user.getEmail());
         response.setRole(user.getRole().name());
+        response.setId(user.getId());
 
         return ResponseEntity.ok(response);
                                                                           
@@ -94,5 +96,20 @@ public class AuthController
         response.put("email",user.getEmail());
         response.put("role",user.getRole().name());
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<?> getUserById(@PathVariable Long userId) {
+
+    System.out.println("🔥 USER API HIT: " + userId);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        
+        Map<String, Object> response = new HashMap<>();
+        response.put("id", user.getId());
+        response.put("name", user.getName());
+        response.put("email", user.getEmail());
+        System.out.println("data received");
+        return ResponseEntity.ok(response);
     }
 }   
