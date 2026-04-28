@@ -53,7 +53,6 @@ public class AuthController
         response.setEmail(user.getEmail());
         response.setRole(user.getRole().name());
         response.setId(user.getId());
-
         return ResponseEntity.ok(response);
                                                                           
     }
@@ -67,7 +66,6 @@ public class AuthController
             response.put("error", "Email already exists!");
             return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
         }
-
         User user = new User();
         user.setName(request.getName());
         user.setEmail(request.getEmail());
@@ -88,9 +86,7 @@ public class AuthController
             response.put("error","Invalid role! Use CUSTOMER or ORGANIZER");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
-
         userRepository.save(user);
-
         Map<String,String> response = new HashMap<>();
         response.put("message","User registered successfully!");
         response.put("email",user.getEmail());
@@ -100,11 +96,8 @@ public class AuthController
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> getUserById(@PathVariable Long userId) {
-
-    System.out.println("🔥 USER API HIT: " + userId);
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        
         Map<String, Object> response = new HashMap<>();
         response.put("id", user.getId());
         response.put("name", user.getName());
