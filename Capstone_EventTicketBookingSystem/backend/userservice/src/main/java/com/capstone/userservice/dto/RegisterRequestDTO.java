@@ -3,7 +3,7 @@ package com.capstone.userservice.dto;
 import jakarta.validation.constraints.Pattern;
 public class RegisterRequestDTO
 {
-    @Pattern(regexp = "^[A-Za-z]{2,}$", message = "Name must contain only alphabets and be at least 2 characters")
+   @Pattern(regexp = "^[A-Za-z ]{2,}$", message = "Name must contain only alphabets and spaces, and be at least 2 characters")
     private String name;
 
     @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@gmail\\.com$", message = "Email must be in format: username@gmail.com")
