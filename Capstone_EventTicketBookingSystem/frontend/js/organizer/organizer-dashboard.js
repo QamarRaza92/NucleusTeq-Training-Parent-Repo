@@ -172,12 +172,5 @@ function showError(message, type = "error") {
     }, 3000);
 }
 
-// const closeBtn = document.querySelector(".close-btn");
-// if (closeBtn) {
-//     closeBtn.addEventListener("click", () => {
-//         document.getElementById("errorPopup").style.display = "none";
-//     });
-// }
-
 loadOrganizerProfile();
 loadEvents();

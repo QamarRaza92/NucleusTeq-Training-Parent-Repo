@@ -30,7 +30,7 @@ if(closeBtn)
 }
 
 function isValidName(name) {
-    const nameRegex = /^[A-Za-z]{2,}$/;
+    const nameRegex = /^(?=(.*[A-Za-z]){2,})[A-Za-z\s]+$/;
     if (!nameRegex.test(name)) {
         return { valid: false, message: "Name must contain only alphabets and be at least 2 characters" };
     }
@@ -143,7 +143,7 @@ if(document.getElementById("registerForm"))
                                             
                                             }
                                             );
-
+}
 if (document.getElementById("loginForm"))
 {
     document.getElementById("loginForm").addEventListener(
@@ -170,19 +170,21 @@ if (document.getElementById("loginForm"))
                                         );
 
                                         const data = await response.json();
+                                        console.log(data);
                                         if(response.ok)
                                         {
                                             localStorage.setItem("token",data.token);
                                             localStorage.setItem("email",data.email);
                                             localStorage.setItem("userRole",data.role);
+                                            localStorage.setItem("userId", data.id);
 
-                                            if(data.role=="CUSTOMER")
+                                            if(data.role==="CUSTOMER")
                                             {
                                                 window.location.href = "customer/dashboard.html";
                                             }
-                                            else if (data.role == "ORGANIZER")
+                                            else if (data.role === "ORGANIZER")
                                             {
-                                                window.location.href = "organizer/dashboard.html";
+                                                window.location.href = "./organizer/dashboard.html";
                                             }
                                             else 
                                             {
@@ -196,5 +198,4 @@ if (document.getElementById("loginForm"))
                                     }
                                 }
                                 );
-}
 }
