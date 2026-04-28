@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/customer/payment.css">
+    <style>
+        .payment-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .payment-card {
+            background: #121212;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+        }
+        .amount {
+            font-size: 36px;
+            color: #8b5cf6;
+            margin: 20px 0;
+        }
+        .pay-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .loader {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <div class="payment-card">
+            <h2>💳 Mock Payment</h2>
+            <p>Event ID: <span id="eventId"></span></p>
+            <p>Tickets: <span id="tickets"></span></p>
+            <div class="amount">₹<span id="amount"></span></div>
+            <button class="pay-btn" onclick="processPayment()">Pay Now</button>
+            <div id="loader" class="loader">Processing...</div>
+        </div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const eventId = params.get("id");
+        const tickets = params.get("tickets");
+        const amount = params.get("amount");
+
+        document.getElementById("eventId").textContent = eventId;
+        document.getElementById("tickets").textContent = tickets;
+        document.getElementById("amount").textContent = amount * tickets;
+
+        async function processPayment() {
+            const token = localStorage.getItem("token");
+            const userId = localStorage.getItem("userId");
+
+            const bookingData = {
+                eventId: parseInt(eventId),
+                noOfTickets: parseInt(tickets),
+                totalAmount: parseFloat(amount * tickets)
+            };
+
+            try {
+                const response = await fetch("http://localhost:8080/api/bookings/create", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify(bookingData)
+                });
+
+                if (response.ok) {
+                    alert("✅ Payment successful! Booking confirmed.");
+                    window.location.href = "my-bookings.html";
+                } else {
+                    const error = await response.json();
+                    alert("❌ Payment failed: " + (error.error || "Unknown error"));
+                }
+            } catch (error) {
+                alert("Server error. Please try again.");
+            }
+        }
+    </script>
+</body>
+</html>

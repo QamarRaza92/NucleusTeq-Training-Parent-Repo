@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/customer/my-bookings.css">
+</head>
+<body>
+    <div class="bookings-container">
+        <div class="bookings-card">
+            <div class="bookings-header">
+                <h2>📋 My Bookings</h2>
+                <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+            </div>
+            <div id="bookingsList" class="bookings-list">
+                <div class="loading">Loading bookings...</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="errorPopup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <p id="popupMessage"></p>
+        </div>
+    </div>
+
+    <script src="../../js/auth.js"></script>
+    <script src="../../js/customer/my-bookings.js"></script>
+</body>
+</html>
