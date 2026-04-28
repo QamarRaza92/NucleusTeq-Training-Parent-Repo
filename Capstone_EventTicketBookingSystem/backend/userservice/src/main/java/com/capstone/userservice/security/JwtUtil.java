@@ -25,12 +25,12 @@ public class JwtUtil
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generateToken(String email,String role)
+    public String generateToken(String email,String role,Long userId)
     {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expiration);
 
-        return Jwts.builder().setSubject(email).claim("role",role).setIssuedAt(now).setExpiration(expiryDate)
+        return Jwts.builder().setSubject(email).claim("role",role).claim("userId",userId).setIssuedAt(now).setExpiration(expiryDate)
                 .signWith(getSigningKey(),SignatureAlgorithm.HS256).compact();
     }
 

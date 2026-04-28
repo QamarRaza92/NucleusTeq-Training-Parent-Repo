@@ -13,7 +13,7 @@ public class User
     private Long id;
 
     @Column(nullable=false)
-    @Pattern(regexp = "^[A-Za-z]{2,}$", message = "Name must contain only alphabets and be at least 2 characters")
+   @Pattern(regexp = "^[A-Za-z ]{2,}$", message = "Name must contain only alphabets and spaces, and be at least 2 characters")
     private String name;
 
     @Column(nullable=false,unique=true)
