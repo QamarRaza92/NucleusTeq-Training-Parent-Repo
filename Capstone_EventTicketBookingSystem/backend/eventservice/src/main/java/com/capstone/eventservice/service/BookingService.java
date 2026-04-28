@@ -135,9 +135,7 @@ public class BookingService
 
     public BookingResponseDTO convertToDTO(Booking booking)
     {
-        System.out.println("Calling user-service for: " + booking.getAudienceId());
         UserResponseDTO user = userClient.getUserById(booking.getAudienceId());
-        System.out.println("User received: " + user);
         return (new BookingResponseDTO(booking.getId(),booking.getEventId(),booking.getNoOfTickets(),
                                         booking.getTotalAmount(),booking.getStatus().toString(),user.getName(),user.getEmail()));
     }
