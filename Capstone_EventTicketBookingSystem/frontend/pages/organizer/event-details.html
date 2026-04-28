@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/organizer/event-details.css">
+</head>
+<body>
+    <div class="details-container">
+        <div class="details-card">
+            <div class="card-header">
+                <h1>📋 Event Details</h1>
+                <a href="dashboard.html" class="back-btn">← Back</a>
+            </div>
+
+            <div id="eventInfo" class="event-info">
+                <div class="loading">Loading event details...</div>
+            </div>
+
+            <div class="action-buttons" id="actionButtons" style="display: none;">
+                <a href="#" id="editLink" class="edit-btn">✏️ Edit Event</a>
+                <button id="cancelBtn" class="cancel-btn">❌ Cancel Event</button>
+            </div>
+
+            <div class="bookings-section" id="bookingsSection" style="display: none;">
+                <h2>📌 Attendees List</h2>
+                <div id="attendeesList"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="errorPopup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <p id="popupMessage"></p>
+        </div>
+    </div>
+
+    <script src="../../js/organizer/event-details.js"></script>
+</body>
+</html>

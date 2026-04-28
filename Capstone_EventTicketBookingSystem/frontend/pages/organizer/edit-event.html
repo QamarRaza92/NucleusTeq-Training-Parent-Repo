@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Event</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/organizer/create-event.css">
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-card">
+            <h1>✏️ Edit Event</h1>
+            <p class="subtitle">Update your event details</p>
+
+            <form id="editEventForm">
+                <input type="hidden" id="eventId">
+
+                <div class="form-group">
+                    <label>🎯 Event Name</label>
+                    <input type="text" id="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>📝 Description</label>
+                    <textarea id="description" rows="3" required></textarea>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label>📅 Event Date</label>
+                        <input type="date" id="eventDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>⏰ Start Time</label>
+                        <input type="time" id="startTime" required>
+                    </div>
+                    <div class="form-group">
+                        <label>⏰ End Time</label>
+                        <input type="time" id="endTime" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>📍 Venue</label>
+                    <input type="text" id="venue" required>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label>🪑 Total Seats</label>
+                        <input type="number" id="totalSeats" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label>💰 Price (₹)</label>
+                        <input type="number" id="price" min="1" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>🏷️ Category (Optional)</label>
+                    <input type="text" id="category">
+                </div>
+
+                <button type="submit" class="submit-btn">💾 Update Event</button>
+                <p class="back-link"><a href="dashboard.html">← Back to Dashboard</a></p>
+            </form>
+        </div>
+    </div>
+
+    <div id="errorPopup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <p id="popupMessage"></p>
+        </div>
+    </div>
+
+    <script src="../../js/organizer/edit-event.js"></script>
+</body>
+</html>

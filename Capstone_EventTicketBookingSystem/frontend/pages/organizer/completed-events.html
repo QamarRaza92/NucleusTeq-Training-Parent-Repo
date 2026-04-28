@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMPLETED Events</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/organizer/events-list.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📅 COMPLETED Events</h1>
+            <a href="dashboard.html" class="back-btn">← Back</a>
+        </div>
+        <div id="eventsList" class="events-grid">
+            <div class="loading">Loading...</div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = "http://localhost:8080/api/events";
+        
+        function getToken() { return localStorage.getItem("token"); }
+        
+        async function loadEvents() {
+            const token = getToken();
+            if (!token) { window.location.href = "../login.html"; return; }
+            
+            try {
+                const response = await fetch(`${API_BASE}/organizer/events?status=COMPLETED`, {
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+                const events = await response.json();
+                displayEvents(events);
+            } catch (error) {
+                document.getElementById("eventsList").innerHTML = '<div class="empty-state">Failed to load events</div>';
+            }
+        }
+        
+        function displayEvents(events) {
+            const container = document.getElementById("eventsList");
+            if (!events || events.length === 0) {
+                container.innerHTML = '<div class="empty-state">No events found</div>';
+                return;
+            }
+            
+            container.innerHTML = events.map(event => `
+                <div class="event-card">
+                    <h3>${event.name}</h3>
+                    <p>${event.venue}</p>
+                    <p>${new Date(event.eventDate).toLocaleDateString()}</p>
+                    <p>Available: ${event.totalSeats - (event.bookedSeats || 0)}</p>
+                    <div class="actions">
+                        ${event.status === 'ACTIVE' ? 
+                            `<a href="edit-event.html?id=${event.id}" class="edit-btn">Edit</a>
+                            <button onclick="cancelEvent(${event.id})" class="cancel-btn">Cancel</button>` : 
+                            ''}
+                    </div>
+                </div>
+            `).join("");
+        }
+        
+        loadEvents();
+    </script>
+</body>
+</html>
