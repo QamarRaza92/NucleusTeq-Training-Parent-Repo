@@ -60,7 +60,6 @@
 			<scope>test</scope>
 		</dependency>
 		
-		//For dotenv (hiding my password)
 		<dependency>
 			<groupId>io.github.cdimascio</groupId>
 			<artifactId>dotenv-java</artifactId>
