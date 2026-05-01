@@ -5,6 +5,7 @@ import com.capstone.userservice.dto.LoginResponseDTO;
 import com.capstone.userservice.dto.RegisterRequestDTO;
 import com.capstone.userservice.entity.User;
 import com.capstone.userservice.repository.UserRepository;
+import com.capstone.userservice.service.AuthService;
 import com.capstone.userservice.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,9 @@ import java.util.Map;
 @RequestMapping("/api/auth")
 public class AuthController
 {
+    @Autowired
+    private AuthService authService;
+
     @Autowired 
     UserRepository userRepository;
 
@@ -38,7 +42,9 @@ public class AuthController
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequestDTO request)
     {
-        Authentication authentication = authenticationManager.authenticate(
+        try
+        {
+            Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -54,55 +60,39 @@ public class AuthController
         response.setRole(user.getRole().name());
         response.setId(user.getId());
         return ResponseEntity.ok(response);
-                                                                          
+        }
+        catch(Exception e)
+        {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(new ErrorResponseDTO("Invalid email or password", HttpStatus.UNAUTHORIZED.value()));
+        }                                               
     }
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequestDTO request)
     {
-        if (userRepository.existsByEmail(request.getEmail()))
+        if (authService.emailExists(request.getEmail()))
         {
-            Map<String,String> response = new HashMap<>();
-            response.put("error", "Email already exists!");
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponseDTO("Email already exists!",HttpStatus.CONFLICT.value()));
         }
-        User user = new User();
-        user.setName(request.getName());
-        user.setEmail(request.getEmail());
-        user.setPhone(request.getPhone());
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-        
-        if(request.getRole().equalsIgnoreCase("ORGANIZER"))
+        try
         {
-            user.setRole(User.Role.ORGANIZER);
+            User user = authService.registerUser(request);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(new SuccessResponseDTO("User registered successfully!", user.getEmail(), user.getRole().name()));
         }
-        else if(request.getRole().equalsIgnoreCase("CUSTOMER"))
+        catch(IllegalArgumentException e)
         {
-            user.setRole(User.Role.CUSTOMER);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                .body(new ErrorResponseDTO(e.getMessage(), HttpStatus.BAD_REQUEST.value()));
         }
-        else
-        {
-            Map<String,String> response = new HashMap<>();
-            response.put("error","Invalid role! Use CUSTOMER or ORGANIZER");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-        }
-        userRepository.save(user);
-        Map<String,String> response = new HashMap<>();
-        response.put("message","User registered successfully!");
-        response.put("email",user.getEmail());
-        response.put("role",user.getRole().name());
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> getUserById(@PathVariable Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        Map<String, Object> response = new HashMap<>();
-        response.put("id", user.getId());
-        response.put("name", user.getName());
-        response.put("email", user.getEmail());
-        System.out.println("data received");
+        UserResponseDTO response = new UserResponseDTO(user.getId(), user.getName(), user.getEmail());
         return ResponseEntity.ok(response);
     }
 }   
