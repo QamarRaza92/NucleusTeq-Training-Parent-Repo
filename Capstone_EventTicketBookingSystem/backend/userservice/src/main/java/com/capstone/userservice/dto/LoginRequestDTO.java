@@ -1,10 +1,8 @@
 package com.capstone.userservice.dto;
-
 public class LoginRequestDTO
 {
     private String email;
     private String password;
-
 
     //Getter and Setter
     public String getEmail(){return email;}

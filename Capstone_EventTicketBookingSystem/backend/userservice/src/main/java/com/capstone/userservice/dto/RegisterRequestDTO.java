@@ -3,17 +3,24 @@ package com.capstone.userservice.dto;
 import jakarta.validation.constraints.Pattern;
 public class RegisterRequestDTO
 {
-   @Pattern(regexp = "^[A-Za-z ]{2,}$", message = "Name must contain only alphabets and spaces, and be at least 2 characters")
+    @NotBlank
+    @Pattern(regexp = "^[A-Za-z ]{2,}$", message = "Name must contain only alphabets and spaces, and be at least 2 characters")
     private String name;
 
     @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@gmail\\.com$", message = "Email must be in format: username@gmail.com")
+    @NotBlank
     private String email;
 
+    @Pattern(regexp = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,12}$",
+            message = "Password must be 8-12 chars with 1 uppercase, 1 number, 1 special char")
+    @NotBlank
     private String password;
 
+    @NotBlank
     @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be exactly 10 digits")
     private String phone;
     
+    @NotBlank
     private String role;
 
     //Getter and Setter
