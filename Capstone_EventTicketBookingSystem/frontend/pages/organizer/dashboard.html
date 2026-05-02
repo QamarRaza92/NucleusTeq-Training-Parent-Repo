@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizer Dashboard</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/organizer/organizer-dashboard.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="logo-icon">🎪</span>
+                <span>EventHub</span>
+            </div>
+            
+            <div class="profile-section">
+                <div class="avatar" id="avatar">👤</div>
+                <h3 id="orgName">Loading...</h3>
+                <p id="orgEmail">organizer@example.com</p>
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-value" id="totalEvents">0</span>
+                        <span class="stat-label">Total Events</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="activeEvents">0</span>
+                        <span class="stat-label">Active</span>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="upcoming-events.html" class="nav-item ">
+                    📊
+                    <span>Upcoming Events</span>
+                </a>
+                <a href="completed-events.html" class="nav-item">
+                    📅 
+                    <span>Completed Events</span>
+                </a>
+                <a href="cancelled-events.html" class="nav-item">
+                    📅 
+                    <span>Cancelled Events</span>
+                </a>
+                <a href="create-event.html" class="nav-item">
+                    ➕ 
+                    <span>Create Event</span>
+                </a>
+                <a href="event-bookings.html" class="nav-item">📋 Bookings</a>
+            </nav>
+
+            <button class="logout-btn" onclick="logout()">
+                🚪 
+                <span>Logout</span>
+            </button>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-bar">
+                <div class="welcome-text">
+                    <h1>Welcome back, <span id="welcomeName">Organizer</span> ✨</h1>
+                    <p>Here's what's happening with your events</p>
+                </div>
+                <div class="date-time" id="currentDateTime"></div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-info">
+                        <h3 id="ongoingEventsCount">0</h3>
+                        <p>Ongoing Events</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-info">
+                        <h3 id="completedEventsCount">0</h3>
+                        <p>Completed Events</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎫</div>
+                    <div class="stat-info">
+                        <h3 id="totalBookingsCount">0</h3>
+                        <p>Total Bookings</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-info">
+                        <h3 id="revenueCount">₹0</h3>
+                        <p>Total Revenue</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="events-section">
+                <div class="section-header">
+                    <h2>Your Events</h2>
+                    <a href="create-event.html" class="create-event-btn">+ New Event</a>
+                </div>
+                <div id="eventsList" class="events-grid">
+                    <!-- All events will show here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="errorPopup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <p id="popupMessage"></p>
+        </div>
+    </div>
+    <script src="../../js/auth.js"></script>
+    <script src="../../js/organizer/organizer-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past Events</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/customer/customer-dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="logo-icon">🎪</span>
+                <span>EventHub</span>
+            </div>
+            <div class="profile-section">
+                <div class="avatar" id="avatar">👤</div>
+                <h3 id="userName">Customer</h3>
+                <p id="userEmail">customer@example.com</p>
+            </div>
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <span>📅</span>
+                    <span>Upcoming Events</span>
+                </a>
+                <a href="past-events.html" class="nav-item active">
+                    <span>⏪</span>
+                    <span>Past Events</span>
+                </a>
+                <a href="my-bookings.html" class="nav-item">
+                    <span>🎫</span>
+                    <span>My Bookings</span>
+                </a>
+            </nav>
+            <button class="logout-btn" onclick="logout()">
+                <span>🚪</span>
+                <span>Logout</span>
+            </button>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-bar">
+                <div class="welcome-text">
+                    <h1>📜 Past Events</h1>
+                    <p>Events that have already happened</p>
+                </div>
+            </div>
+            <div id="eventsList" class="events-grid">
+                <div class="loading">Loading...</div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const EVENT_API = "http://localhost:8080/api/events";
+        
+        function getToken() { return localStorage.getItem("token"); }
+        
+        function logout() { localStorage.clear(); window.location.href = "../login.html"; }
+        
+        async function loadPastEvents() {
+            const token = getToken();
+            if (!token) { window.location.href = "../login.html"; return; }
+            
+            try {
+                const response = await fetch(`${EVENT_API}/customer-events?status=COMPLETED`, {
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+                const events = await response.json();
+                displayEvents(events);
+            } catch (error) {
+                document.getElementById("eventsList").innerHTML = '<div class="empty-state">Failed to load events</div>';
+            }
+        }
+        
+        function displayEvents(events) {
+            const container = document.getElementById("eventsList");
+            if (!events || events.length === 0) {
+                container.innerHTML = '<div class="empty-state">No past events found</div>';
+                return;
+            }
+            
+            container.innerHTML = events.map(event => `
+                <div class="event-card">
+                    <div class="event-title">${event.name}</div>
+                    <div class="event-details">📍 ${event.venue}</div>
+                    <div class="event-details">📅 ${new Date(event.eventDate).toLocaleDateString()}</div>
+                    <div class="price">₹${event.price}</div>
+                    <div class="available-seats">✅ ${event.totalSeats - (event.bookedSeats || 0)} seats available</div>
+                </div>
+            `).join("");
+        }
+        
+        loadPastEvents();
+    </script>
+</body>
+</html>

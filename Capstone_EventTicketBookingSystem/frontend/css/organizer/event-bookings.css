@@ -1,0 +1,145 @@
+/* Container */
+.bookings-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Card */
+.bookings-card {
+    background: #121212;
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid #2a2a2a;
+    color: #ffffff;
+    border-color: #9cae29f4;
+}
+
+.bookings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.bookings-header h1 {
+    color: #ffffff;
+}
+
+.back-link {
+    color: #8b5cf6;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.event-info {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 25px;
+    color: #ffffff;
+}
+
+.event-info h2 {
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.event-info p {
+    color: #ffffff;
+    margin: 5px 0;
+}
+
+.event-details-card {
+    background: linear-gradient(145deg, #1e1e1e, #141414);
+    border: 1px solid #333;
+    padding: 20px;
+    border-radius: 15px;
+    color: #ffffff;
+}
+
+.meta-info {
+    display: flex;
+    gap: 15px;
+    color: #ffffff;
+    margin: 10px 0;
+    font-size: 0.9rem;
+}
+
+.seat-stats {
+    background: #2a2a2a;
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-top: 10px;
+    color: #ffffff;
+}
+
+.bookings-list {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #ffffff;
+     min-width: 800px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+td {
+    color: #ffffff;
+}
+
+th {
+    color: #8b5cf6;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}
+
+tr:hover {
+    background: #1a1a1a;
+}
+
+.status-badge {
+    background: rgba(139, 92, 246, 0.15);
+    color: #a78bfa;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #ffffff;
+}
+
+.empty-icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.empty-state small {
+    font-size: 12px;
+    color: #cccccc;
+    display: block;
+    margin-top: 8px;
+}
