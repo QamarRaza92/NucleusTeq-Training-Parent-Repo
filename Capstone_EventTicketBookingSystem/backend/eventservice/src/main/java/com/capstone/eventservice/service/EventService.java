@@ -61,6 +61,7 @@ public class EventService
         dto.setStartTime(entity.getStartTime());
         dto.setEndTime(entity.getEndTime());
         dto.setTotalSeats(entity.getTotalSeats());
+        dto.setDescription(entity.getDescription());
         dto.setBookedSeats(entity.getBookedSeats());
         dto.setPrice(entity.getPrice());
         dto.setStatus(entity.getStatus().toString());

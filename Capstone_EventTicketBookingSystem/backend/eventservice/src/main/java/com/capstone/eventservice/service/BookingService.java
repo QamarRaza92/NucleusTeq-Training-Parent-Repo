@@ -103,6 +103,11 @@ public class BookingService
         {
             throw new RuntimeException("Event already ended");
         }
+
+        if(event.getBookedSeats() > event.getTotalSeats())
+        {
+            throw new RuntimeException("Cannot Book more seats then available!");
+        }
         int availableSeats = event.getTotalSeats() - event.getBookedSeats();
 
         if(request.getNoOfTickets()>availableSeats)

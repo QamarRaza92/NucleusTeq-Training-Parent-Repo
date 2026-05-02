@@ -1,6 +1,7 @@
 package com.capstone.eventservice.dto;
 import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
+import java.math.BigDecimal;
 public class EventRequestDTO
 {
     @Pattern(regexp = "^[A-Za-z0-9 .-]{2,}$", message = "Invalid event name")
@@ -26,7 +27,7 @@ public class EventRequestDTO
     private Integer totalSeats;
 
     @Positive(message = "Event price must be positive")
-    private Double price;
+    private BigDecimal price;
 
     private String category;
 
@@ -39,7 +40,7 @@ public class EventRequestDTO
     public void setStartTime(LocalDateTime startTime){this.startTime=startTime;}
     public void setEndTime(LocalDateTime endTime){this.endTime=endTime;}
     public void setTotalSeats(Integer totalSeats){this.totalSeats=totalSeats;}
-    public void setPrice(Double price){this.price=price;}
+    public void setPrice(BigDecimal price){this.price=price;}
     public void setCategory(String category){this.category=category;}
     public void setCreatedAt(LocalDateTime createdAt){this.createdAt=createdAt;}
 
@@ -50,7 +51,7 @@ public class EventRequestDTO
     public LocalDateTime getStartTime(){return startTime;}
     public LocalDateTime getEndTime(){return endTime;}
     public Integer getTotalSeats(){return totalSeats;}
-    public Double getPrice(){return price;}
+    public BigDecimal getPrice(){return price;}
     public String getCategory(){return category;}
     public LocalDateTime getCreatedAt(){return createdAt;}
 }

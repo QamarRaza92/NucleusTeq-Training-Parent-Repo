@@ -1,5 +1,6 @@
 package com.capstone.eventservice.dto;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 public class EventResponseDTO
 {
@@ -10,8 +11,9 @@ public class EventResponseDTO
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private Integer totalSeats;
+    private String description;
     private Integer bookedSeats;  
-    private Double price;
+    private BigDecimal price;
     private String status;
     private Long organizerId;
 
@@ -22,8 +24,9 @@ public class EventResponseDTO
     public void setStartTime(LocalDateTime startTime){this.startTime=startTime;}
     public void setEndTime(LocalDateTime endTime){this.endTime=endTime;}
     public void setTotalSeats(Integer totalSeats){this.totalSeats=totalSeats;}
+    public void setDescription(String description){this.description = description;}
     public void setBookedSeats(Integer bookedSeats){this.bookedSeats=bookedSeats;}
-    public void setPrice(Double price){this.price=price;}
+    public void setPrice(BigDecimal price){this.price=price;}
     public void setStatus(String status){this.status=status;}
     public void setOrganizerId(Long organizerId){this.organizerId=organizerId;}
 
@@ -34,8 +37,9 @@ public class EventResponseDTO
     public LocalDateTime getStartTime(){return startTime;}
     public LocalDateTime getEndTime(){return endTime;}
     public Integer getTotalSeats(){return totalSeats;}
+    public String getDescription(){return description;}
     public Integer getBookedSeats(){return bookedSeats;}
-    public Double getPrice(){return price;}
+    public BigDecimal getPrice(){return price;}
     public String getStatus(){return status;}
     public Long getOrganizerId(){return organizerId;}
 }

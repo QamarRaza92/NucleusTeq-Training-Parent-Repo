@@ -3,6 +3,7 @@ package com.capstone.eventservice.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
+import java.math.BigDecimal;
 
 @Entity 
 @Table(name="events")
@@ -13,6 +14,7 @@ public class Event
     private Long id;
 
     @Column(name = "name", nullable=false)
+    @NotBlank
     @Pattern(regexp = "^[A-Za-z0-9 .-]{2,}$", message = "Invalid event name")
     private String name;
 
@@ -46,7 +48,7 @@ public class Event
 
     @Column(name = "price", nullable=false)
     @Positive(message = "Price must be positive")
-    private Double price;
+    private BigDecimal price;
 
     @Column(name="category")
     private String category;
@@ -101,8 +103,8 @@ public class Event
     public Integer getBookedSeats() { return bookedSeats; }
     public void setBookedSeats(Integer bookedSeats) { this.bookedSeats = bookedSeats; }
 
-    public Double getPrice() { return price; }
-    public void setPrice(Double price) { this.price = price; }
+    public BigDecimal getPrice() { return price; }
+    public void setPrice(BigDecimal price) { this.price = price; }
 
     public String getCategory() { return category; }
     public void setCategory(String category) { this.category = category; }
