@@ -12,7 +12,7 @@ public class ErrorResponseDTO {
     public String getError() {
         return error;
     }
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 }

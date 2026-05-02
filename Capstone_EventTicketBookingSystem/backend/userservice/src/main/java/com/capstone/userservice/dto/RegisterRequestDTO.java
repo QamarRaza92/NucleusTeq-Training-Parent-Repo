@@ -1,6 +1,6 @@
 package com.capstone.userservice.dto;
 
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 public class RegisterRequestDTO
 {
     @NotBlank

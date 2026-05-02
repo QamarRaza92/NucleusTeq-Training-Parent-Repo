@@ -3,9 +3,12 @@ package com.capstone.userservice.controller;
 import com.capstone.userservice.dto.LoginRequestDTO;
 import com.capstone.userservice.dto.LoginResponseDTO;
 import com.capstone.userservice.dto.RegisterRequestDTO;
+import com.capstone.userservice.dto.UserResponseDTO;
+import com.capstone.userservice.dto.SuccessResponseDTO;
+import com.capstone.userservice.dto.ErrorResponseDTO;
 import com.capstone.userservice.entity.User;
 import com.capstone.userservice.repository.UserRepository;
-import com.capstone.userservice.service.AuthService;
+import com.capstone.userservice.service.AuthService; 
 import com.capstone.userservice.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,7 +43,7 @@ public class AuthController
     @Autowired
     AuthenticationManager authenticationManager;
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequestDTO request)
+    public ResponseEntity<?> login(@Valid @RequestBody LoginRequestDTO request)
     {
         try
         {
