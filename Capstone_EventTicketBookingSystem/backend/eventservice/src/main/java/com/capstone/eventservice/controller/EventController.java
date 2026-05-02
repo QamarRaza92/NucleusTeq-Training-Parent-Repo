@@ -17,6 +17,7 @@ public class EventController
     @Autowired
     private EventService eventService;
 
+    //For creating an event through organizer.
     @PostMapping("/create")
     public ResponseEntity<?> createEvent(@Valid @RequestBody EventRequestDTO request, 
                                         HttpServletRequest httpRequest)
@@ -30,6 +31,7 @@ public class EventController
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    //For creating an event through organizer.
     @PutMapping("/update/{eventId}")
     public ResponseEntity<?> updateEvent(@PathVariable Long eventId,
                                          @Valid @RequestBody EventRequestDTO request,
@@ -45,13 +47,6 @@ public class EventController
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping
-    public ResponseEntity<?> getAllEvents()
-    {
-        List<EventResponseDTO> response = eventService.getAllEvents();
-        return ResponseEntity.ok(response);
-    }
-
     @GetMapping("/{eventId}")
     public ResponseEntity<?> getEventById(@PathVariable Long eventId)
     {
@@ -59,6 +54,7 @@ public class EventController
         return ResponseEntity.ok(response);
     }
 
+    //For customer view, get all ACTIVE or COMPLETED events, Based on query param (not showing cancelled event to customer, bcoz event was cancelled by organzer should not be seen to customer)
     @GetMapping("/customer-events")
     public ResponseEntity<?> getEventsByStatus(@RequestParam String status)
     {
@@ -70,6 +66,7 @@ public class EventController
         return ResponseEntity.ok(response);
     }
 
+    //Get all available events of organizer to show on its dashboard (be it ACTIVE,COMPLETED or CANCELLED)
     @GetMapping("/organizer/{organizerId}")
     public ResponseEntity<?> getAnOrganizerAllEventsByOrganizerId(@PathVariable Long organizerId)
     {
@@ -77,42 +74,7 @@ public class EventController
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/my-upcoming-events")
-    public ResponseEntity<?> getUpcomingEventsOfOrganizer(HttpServletRequest request)
-    {
-        Long organizerId = (Long) request.getAttribute("userId");
-        if (organizerId == null)
-        {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
-        }
-        List<EventResponseDTO> response = eventService.getUpcomingEventsOfOrganizer(organizerId);
-        return ResponseEntity.ok(response);
-    }
-
-    @GetMapping("/my-completed-events")
-    public ResponseEntity<?> getCompletedEventsOfOrganizer(HttpServletRequest request)
-    {
-        Long organizerId = (Long) request.getAttribute("userId");
-        if (organizerId == null)
-        {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
-        }
-        List<EventResponseDTO> response = eventService.getCompletedEventsOfOrganizer(organizerId);
-        return ResponseEntity.ok(response);
-    }
-
-    @GetMapping("/my-cancelleed-events")
-    public ResponseEntity<?> getCancelledEventsOfOrganizer(HttpServletRequest request)
-    {
-        Long organizerId = (Long) request.getAttribute("userId");
-        if (organizerId == null)
-        {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
-        }
-        List<EventResponseDTO> response = eventService.getCancelledEventsOfOrganizer(organizerId);
-        return ResponseEntity.ok(response);
-    }
-
+    //Get organizer events by status(ACTIVE,COMPLETED,CANCELLED) to show on upcoming,completed and cancelled event pages separately.
     @GetMapping("/organizer/events")
     public ResponseEntity<?> getEventsByOrganizerAndStatus(@RequestParam String status, HttpServletRequest request)
     {
@@ -127,7 +89,7 @@ public class EventController
         return ResponseEntity.ok(response);
     }
 
-
+    //Cancel an event thorugh organizer
     @PutMapping("/cancel/{eventId}")
     public ResponseEntity<?> cancelEvent(@PathVariable Long eventId,HttpServletRequest httpRequest)
     {

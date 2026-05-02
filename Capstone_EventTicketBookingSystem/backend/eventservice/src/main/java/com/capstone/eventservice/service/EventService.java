@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import com.capstone.eventservice.entity.Booking;
 import com.capstone.eventservice.repository.BookingRepository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.scheduling.annotation.Scheduled;
 import java.util.Comparator;
 @Service 
 public class EventService
@@ -22,6 +23,7 @@ public class EventService
     @Autowired
     private BookingRepository bookingRepository;
 
+    //Create event requires an event request along with organizer id.
     public EventResponseDTO createEvent(EventRequestDTO request, Long organizerId)
     {
         LocalDateTime now = LocalDateTime.now();
@@ -51,6 +53,7 @@ public class EventService
         return convertToDTO(savedEntity);
     }
 
+    //To return response, we are converting Entities into DTO
     public EventResponseDTO convertToDTO(Event entity)
     {
         EventResponseDTO dto = new EventResponseDTO();
@@ -69,6 +72,7 @@ public class EventService
         return dto;
     }
 
+    //To update events, we pass update request object, eventId along with organizerId
     public EventResponseDTO updateEvent(EventRequestDTO request,Long eventId,Long organizerId)
     {
         Event existingEvent = eventRepository.findById(eventId)
@@ -112,37 +116,20 @@ public class EventService
         return convertToDTO(updatedEvent);
     }
 
-    public List<EventResponseDTO> getAllEvents()
-    {
-        return eventRepository.findAll().stream().map(this::convertToDTO).toList();
-    }
-
+    //To fetch event by id
     public EventResponseDTO getEventById(Long eventId)
     {
         Event event = eventRepository.findById(eventId).orElseThrow(()-> new EventNotFoundException(eventId));
         return convertToDTO(event);
     }
 
+    //For customer view, to fetch all events by its status (ACTIVE,COMPLETED). "CANCELLED" events are shown to customer due to privacy or organizer.
     public List<EventResponseDTO> getEventsByStatus(String status)
     {
         return eventRepository.findByStatus(Event.EventStatus.valueOf(status.toUpperCase())).stream().map(this::convertToDTO).toList();
     }
 
-    public List<EventResponseDTO> getUpcomingEventsOfOrganizer(Long organizerId)
-    {
-        return eventRepository.findByOrganizerIdAndStatus(organizerId,Event.EventStatus.ACTIVE).stream().map(this::convertToDTO).toList();
-    }
-
-    public List<EventResponseDTO> getCompletedEventsOfOrganizer(Long organizerId)
-    {
-        return eventRepository.findByOrganizerIdAndStatus(organizerId,Event.EventStatus.COMPLETED).stream().map(this::convertToDTO).toList();
-    }
-
-    public List<EventResponseDTO> getCancelledEventsOfOrganizer(Long organizerId)
-    {
-        return eventRepository.findByOrganizerIdAndStatus(organizerId,Event.EventStatus.CANCELLED).stream().map(this::convertToDTO).toList();
-    }
-
+    //All events of an organizer by its ID
     public List<EventResponseDTO> getAnOrganizerAllEventsByOrganizerId(Long organizerId) {
     return eventRepository.findByOrganizerId(organizerId)
             .stream()
@@ -150,6 +137,7 @@ public class EventService
             .toList();
     }
 
+    //Get event an organizer all events by its status (To show on upcoming,completed and cancelled events)
     public List<EventResponseDTO> getEventsByOrganizerAndStatus(Long organizerId, String status)
     {
         Event.EventStatus eventStatus = Event.EventStatus.valueOf(status.toUpperCase());
@@ -179,5 +167,19 @@ public class EventService
         bookingRepository.saveAll(bookings);
         event.setStatus(Event.EventStatus.CANCELLED);
         eventRepository.save(event);
+    }
+
+    //To update event status in every hour based on its date.
+    @Scheduled(cron = "0 0 * * * *")
+    @Transactional
+    public void updateEventStatus()
+    {
+        //Changing status from ACTIVE to COMPLETED for the events which have already been done.
+        List<Event> pastEvents = eventRepository.findEventDateBeforeAndStatus(LocalDateTime.now(),Event.EventStatus.ACTIVE);
+        for(Event event: pastEvents)
+        {
+            event.setStatus(Event.EventStatus.COMPLETED);
+        }
+        eventRepository.save(pastEvents);
     }
 }

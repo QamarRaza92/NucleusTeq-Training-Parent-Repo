@@ -13,4 +13,5 @@ public interface EventRepository extends JpaRepository<Event,Long>
     List<Event> findByEventDateBefore(LocalDateTime date);
     List<Event> findByOrganizerIdAndStatus(Long organizerId, Event.EventStatus status);
     List<Event> findByStatus(Event.EventStatus status);
+    List<Event> findByEventDateBeforeAndStatus(LocalDateTime date, Event.EventStatus status);
 }
