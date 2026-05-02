@@ -47,6 +47,7 @@ public class EventController
         return ResponseEntity.ok(response);
     }
 
+    //Get an event details.
     @GetMapping("/{eventId}")
     public ResponseEntity<?> getEventById(@PathVariable Long eventId)
     {

@@ -20,18 +20,7 @@ public class BookingController
         this.bookingService = bookingService;
     }
 
-    @GetMapping("/{bookingId}")
-    public ResponseEntity<?> getBookingById(@PathVariable Long bookingId,HttpServletRequest request)
-    {
-        Long customerId = (Long) request.getAttribute("userId");
-        if (customerId == null)
-        {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
-        }
-        BookingResponseDTO response = bookingService.getBookingById(bookingId,customerId);
-        return ResponseEntity.ok(response);
-    }
-
+    //Get all bookings for the events organized by an organizer
     @GetMapping("/my-bookings-organizer")
     public ResponseEntity<?> getMyBookingsByOrganizer(HttpServletRequest request)
     {
@@ -43,6 +32,7 @@ public class BookingController
         return ResponseEntity.ok(bookingService.getMyBookingsByOrganizerId(organizerId));
     }
 
+    //Get all bookings done by a specific customer
     @GetMapping("/my-bookings-customer")
     public ResponseEntity<?> getMyBookingsByCustomerId(HttpServletRequest request)
     {
@@ -54,6 +44,7 @@ public class BookingController
         return ResponseEntity.ok(bookingService.getMyBookingsByCustomerId(customerId));
     }
 
+    //Create bookings, it automatically gets triggered when a customer books a ticket.
     @PostMapping("/create")
     public ResponseEntity<?> createBooking(@Valid @RequestBody BookingRequestDTO request,
                                             HttpServletRequest httpRequest)
@@ -67,6 +58,7 @@ public class BookingController
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    //Cancel an event by customer
     @PutMapping("/customer/cancel/{bookingId}")
     public ResponseEntity<?> cancelBooking(@PathVariable Long bookingId,
                                             HttpServletRequest httpRequest)
@@ -78,18 +70,5 @@ public class BookingController
         }
         bookingService.cancelBooking(bookingId,customerId);
         return ResponseEntity.ok("Booking cancelled successfully");
-    }
-
-    @DeleteMapping("/organizer/{eventId}")
-    public ResponseEntity<?> deleteAllBookingsByEventId(@PathVariable Long eventId,
-                                                        HttpServletRequest httpRequest)
-    {
-        Long organizerId = (Long) httpRequest.getAttribute("userId");
-        if (organizerId == null)
-        {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
-        }
-        bookingService.deleteAllBookingsByEventId(eventId,organizerId);
-        return ResponseEntity.ok("All bookings for event id: " + eventId + " deleted by organizer " + organizerId);
     }
 }

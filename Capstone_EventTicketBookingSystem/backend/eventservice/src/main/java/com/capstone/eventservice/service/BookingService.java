@@ -28,21 +28,8 @@ public class BookingService
 
     @Autowired 
     private EventRepository eventRepository;
-                         
-    public BookingResponseDTO getBookingById(Long bookingId,Long customerId)
-    {
-        Booking booking = bookingRepository.findById(bookingId)
-                          .orElseThrow(()->new BookingNotFoundException(bookingId));
-        if(booking.getAudienceId().equals(customerId))
-        {
-            return convertToDTO(booking);
-        }
-        else 
-        {
-            throw new UnauthorizedException("You are not authorized to view this booking");
-        }
-    }
 
+    //Get all bookings for the events organizer by a specific organizer
     public List<BookingResponseDTO> getMyBookingsByOrganizerId(Long organizerId)
     {
         List<Event> events = eventRepository.findByOrganizerId(organizerId);
@@ -56,6 +43,7 @@ public class BookingService
         return response;    
     }
 
+    //Get all bookings done by a customer
     public List<BookingResponseDTO> getMyBookingsByCustomerId(Long customerId)
     {
         List<BookingResponseDTO> response = bookingRepository.findByAudienceId(customerId).stream()
@@ -63,7 +51,7 @@ public class BookingService
         return response;
     }
 
-
+    //To cancel booking by a customer. Cancellation also affects organizer revenue. Can't cancel bookings within 3 hours of event start.
     @Transactional
     public void cancelBooking(Long bookingId,Long customerId)
     {
@@ -93,6 +81,7 @@ public class BookingService
         eventRepository.save(event);
     }
 
+    //To create booking by a customer. Booking cant be done after event has already been COMPLETED
     @Transactional
     public BookingResponseDTO createBooking(BookingRequestDTO request,Long customerId)
     {
@@ -124,20 +113,7 @@ public class BookingService
         return convertToDTO(saved);
     }
 
-    @Transactional
-    public void deleteAllBookingsByEventId(Long eventId,Long organizerId)
-    {
-        Event event = eventRepository.findById(eventId)
-                      .orElseThrow(()-> new EventNotFoundException(eventId));
-        if(!event.getOrganizerId().equals(organizerId))
-        {
-            throw new UnauthorizedException("You are not authorized to cancel this event");
-        }
-        event.setBookedSeats(0);
-        eventRepository.save(event);
-        bookingRepository.deleteByEventId(eventId);
-    }
-
+    //For returning DTO instead of complete Entity(It uses feign client facility)
     public BookingResponseDTO convertToDTO(Booking booking)
     {
         UserResponseDTO user = userClient.getUserById(booking.getAudienceId());

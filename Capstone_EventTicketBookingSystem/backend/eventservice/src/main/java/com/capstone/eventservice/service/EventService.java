@@ -145,6 +145,7 @@ public class EventService
                 .stream().sorted(Comparator.comparing(Event::getEventDate)).map(this::convertToDTO).toList();
     }
 
+    //Cancel an event organizer by organizer. Cancelling event also updates booking status as "CANCELLED_BY_ORGANIZER".
     @Transactional
     public void cancelEvent(Long eventId,Long organizerId)
     {
@@ -175,11 +176,11 @@ public class EventService
     public void updateEventStatus()
     {
         //Changing status from ACTIVE to COMPLETED for the events which have already been done.
-        List<Event> pastEvents = eventRepository.findEventDateBeforeAndStatus(LocalDateTime.now(),Event.EventStatus.ACTIVE);
+        List<Event> pastEvents = eventRepository.findByEventDateBeforeAndStatus(LocalDateTime.now(),Event.EventStatus.ACTIVE);
         for(Event event: pastEvents)
         {
             event.setStatus(Event.EventStatus.COMPLETED);
         }
-        eventRepository.save(pastEvents);
+        eventRepository.saveAll(pastEvents);
     }
 }
