@@ -12,7 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 @Component
@@ -24,6 +25,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter
     @Autowired
     private UserDetailsService userDetailsService;
 
+    private static final Logger log = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
+
     @Override
     protected void doFilterInternal(HttpServletRequest request,HttpServletResponse response,FilterChain chain) throws ServletException,IOException
     {
@@ -31,6 +34,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter
 
         if (authHeader == null || !authHeader.startsWith("Bearer "))
         {
+            log.warn("No JWT token found in request");
             chain.doFilter(request,response);
             return;
         }
@@ -41,8 +45,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter
         {
             String email = jwtUtil.extractEmail(token);
             String role = jwtUtil.extractRole(token);
-            // Long userId = jwtUtil.extractUserId(token);
-
+            log.info("JWT validated - User: {}, Role: {}", email, role);
             UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails,null,
