@@ -7,7 +7,6 @@ public class LoginResponseDTO
     private String role;
     private Long id;
 
-
     //Getter and Setter
     public String getToken(){return token;}
     public void setToken(String token){this.token = token;}
