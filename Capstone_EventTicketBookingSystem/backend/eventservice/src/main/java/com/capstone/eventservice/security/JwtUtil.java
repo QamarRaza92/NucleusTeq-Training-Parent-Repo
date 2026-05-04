@@ -69,4 +69,3 @@ public class JwtUtil
     return claims.get("userId", Long.class); 
 }
 }
-//http.cors.enable 

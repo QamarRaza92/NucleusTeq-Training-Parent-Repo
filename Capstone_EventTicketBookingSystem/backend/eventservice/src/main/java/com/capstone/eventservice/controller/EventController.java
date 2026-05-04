@@ -67,7 +67,7 @@ public class EventController
         return ResponseEntity.ok(response);
     }
 
-    //For customer view, get all ACTIVE or COMPLETED events, Based on query param (not showing cancelled event to customer, bcoz event was cancelled by organzer should not be seen to customer)
+    //For customer view, get all ACTIVE or COMPLETED events, Based on query param (not showing cancelled event to customer, bcoz event was cancelled by organzer should not be visible to customer)
     @GetMapping("/customer-events")
     public ResponseEntity<?> getEventsByStatus(@RequestParam String status)
     {
@@ -116,13 +116,13 @@ public class EventController
     @PutMapping("/cancel/{eventId}")
     public ResponseEntity<?> cancelEvent(@PathVariable Long eventId,HttpServletRequest httpRequest)
     {
-        log.info("API Call: Cancel Event - EventId: {}, Organizer: {}", eventId, organizerId);
         Long organizerId = (Long) httpRequest.getAttribute("userId");
         if (organizerId == null)
         {
             log.warn("Invalid Organizer: Organizer must not be null");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
         }
+        log.info("API Call: Cancel Event - EventId: {}, Organizer: {}", eventId, organizerId);
         eventService.cancelEvent(eventId,organizerId);
         log.info("API Success: Event cancelled - ID: {}", eventId);
         return ResponseEntity.ok("Event cancelled successfully");

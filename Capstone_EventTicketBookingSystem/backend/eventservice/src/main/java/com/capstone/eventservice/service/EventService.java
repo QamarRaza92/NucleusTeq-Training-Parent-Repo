@@ -97,6 +97,12 @@ public class EventService
             throw new RuntimeException("You are not authorized to update this event");
         }
 
+        if(existingEvent.getStatus()!=Event.EventStatus.ACTIVE)
+        {
+            log.warn("Validation Failed: Cannot update a 'COMPLETED' or 'CANCELLED' event");
+            throw new RuntimeException("Updation is allowed for 'UPCOMING' events only");
+        }
+
         if(request.getEndTime().isBefore(request.getStartTime()))
         {
             log.warn("Invalid Inputs: End time must be after start time");
@@ -184,17 +190,17 @@ public class EventService
             log.warn("Unauthorized Cancellation: Organizer:{} tried to cancel Event:{}",organizerId,eventId);
             throw new RuntimeException("Not authorized");
         }
-
-        if (LocalDateTime.now().isAfter(event.getStartTime().minusHours(3))) 
-        {
-            log.warn("Validation Failed: Cannot cancel event within 3 hours of start time");
-            throw new RuntimeException("Cannot cancel event within 3 hours of start time");
-        }
         
         if (event.getStatus() == Event.EventStatus.COMPLETED)
         {
             log.warn("Validation Failed: Cannot cancel a 'COMPLETED' event");
             throw new RuntimeException("Cannot cancel a completed event");
+        }
+
+        if (LocalDateTime.now().isAfter(event.getStartTime().minusHours(3))) 
+        {
+            log.warn("Validation Failed: Cannot cancel event within 3 hours of start time");
+            throw new RuntimeException("Cannot cancel event within 3 hours of start time");
         }
 
         List<Booking> bookings = bookingRepository.findByEventId(eventId);
