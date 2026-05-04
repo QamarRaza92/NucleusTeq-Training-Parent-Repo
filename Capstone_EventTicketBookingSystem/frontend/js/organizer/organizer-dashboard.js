@@ -1,13 +1,5 @@
 const EVENT_API = "http://localhost:8080/api/events";
 const BOOKING_API = "http://localhost:8080/api/bookings";
-function logout() {
-    localStorage.clear();
-    window.location.href = "../login.html";
-}
-
-function getToken() {
-    return localStorage.getItem("token");
-}
 
 function updateDateTime() {
     const now = new Date();
@@ -126,7 +118,7 @@ async function loadEvents() {
         
     } catch (error) {
         console.error("Error loading events:", error);
-        showError("Failed to load events");
+        showNotification("Failed to load events","error");
     }
 }
 
@@ -141,35 +133,15 @@ async function cancelEvent(eventId) {
         });
         
         if (response.ok) {
-            showError("Event cancelled successfully!", "success");
+            alert("Event cancelled successfully!!");
             loadEvents();
         } else {
             const error = await response.json();
-            showError(error.error || "Failed to cancel event");
+            showNotification(error.message || error.error || "Failed to cancel event","error");
         }
     } catch (error) {
-        showError("Server error. Please try again.");
+        showNotification("Server error. Please try again.","error");
     }
-}
-
-function showError(message, type = "error") {
-    const popup = document.getElementById("errorPopup");
-    const popupMessage = document.getElementById("popupMessage");
-    const popupContent = document.querySelector(".popup-content");
-    
-    if (type === "success") {
-        popupContent.style.borderLeftColor = "#22c55e";
-    } else {
-        popupContent.style.borderLeftColor = "#ef4444";
-    }
-    
-    popupMessage.textContent = message;
-    popup.style.display = "block";
-    
-    setTimeout(() => {
-        popup.style.display = "none";
-        popupContent.style.borderLeftColor = "#ef4444";
-    }, 3000);
 }
 
 loadOrganizerProfile();

@@ -1,9 +1,4 @@
 const BOOKING_API = "http://localhost:8080/api/bookings";
-
-function getToken() {
-    return localStorage.getItem("token");
-}
-
 async function loadBookings() {
     const token = getToken();
 

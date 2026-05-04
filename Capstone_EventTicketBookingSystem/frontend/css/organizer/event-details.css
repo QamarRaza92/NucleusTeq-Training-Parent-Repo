@@ -154,15 +154,3 @@
 .attendee-tickets {
     color: #f59e0b;
 }
-
-.empty-state {
-    text-align: center;
-    color: #888;
-    padding: 30px;
-}
-
-.loading {
-    text-align: center;
-    color: #888;
-    padding: 30px;
-}

@@ -10,7 +10,7 @@
 <body>
     <div class="details-container">
         <div class="details-card">
-            <button class="back-btn" onclick="goBack()">← Back</button>
+            <button class="btn-back" onclick="goBack()">Back</button>
             
             <div id="eventDetails" class="event-details">
                 <div class="loading">Loading...</div>
@@ -23,7 +23,7 @@
                     <input type="number" id="ticketCount" min="1" value="1">
                 </div>
                 <div class="total-amount">Total: ₹<span id="totalAmount">0</span></div>
-                <button id="bookNowBtn" class="book-btn">Proceed to Payment →</button>
+                <button id="bookNowBtn" class="btn-back">Proceed to Payment →</button>
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@
             <p id="popupMessage"></p>
         </div>
     </div>
-
+    <script src="../../js/auth.js"></script>
     <script src="../../js/customer/event-details.js"></script>
 </body>
 </html>

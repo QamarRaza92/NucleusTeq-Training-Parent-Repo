@@ -1,34 +1,14 @@
-const API_BASE = "http://localhost:8080/api/events";
+const EVENT_API = "http://localhost:8080/api/events";
 
 function getEventIdFromURL() {
     const params = new URLSearchParams(window.location.search);
     return params.get("id");
 }
 
-function showError(message) {
-    const popup = document.getElementById("errorPopup");
-    const popupMessage = document.getElementById("popupMessage");
-    
-    if (popup && popupMessage) {
-        popupMessage.textContent = message;
-        popup.style.display = "block";
-        setTimeout(() => {
-            popup.style.display = "none";
-        }, 3000);
-    }
-}
-
-const closeBtn = document.querySelector(".close-btn");
-if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
-        document.getElementById("errorPopup").style.display = "none";
-    });
-}
-
 async function loadEventData() {
     const eventId = getEventIdFromURL();
     if (!eventId) {
-        showError("No event ID found");
+        showNotification("No event ID found","error");
         window.location.href = "dashboard.html";
         return;
     }
@@ -40,7 +20,7 @@ async function loadEventData() {
     }
     
     try {
-        const response = await fetch(`${API_BASE}/${eventId}`, {
+        const response = await fetch(`${EVENT_API}/${eventId}`, {
             headers: { "Authorization": `Bearer ${token}` }
         });
         
@@ -66,7 +46,7 @@ async function loadEventData() {
         document.getElementById("endTime").value = endTimeStr;
         
     } catch (error) {
-        showError("Failed to load event data");
+        showNotification("Failed to load event data","error");
         console.error(error);
     }
 }
@@ -87,7 +67,7 @@ if (document.getElementById("editEventForm")) {
         const category = document.getElementById("category").value;
         
         if (!name || !description || !eventDate || !startTime || !endTime || !venue || !totalSeats || !price) {
-            showError("Please fill all required fields");
+            showNotification("Please fill all required fields","error");
             return;
         }
         
@@ -95,7 +75,7 @@ if (document.getElementById("editEventForm")) {
         const endDateTime = new Date(`${eventDate}T${endTime}`);
         
         if (endDateTime <= eventDateTime) {
-            showError("End time must be after start time");
+            showNotification("End time must be after start time","error");
             return;
         }
         
@@ -115,7 +95,7 @@ if (document.getElementById("editEventForm")) {
         };
         
         try {
-            const response = await fetch(`${API_BASE}/update/${eventId}`, {
+            const response = await fetch(`${EVENT_API}/update/${eventId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -130,10 +110,10 @@ if (document.getElementById("editEventForm")) {
                 alert("✅ Event updated successfully!");
                 window.location.href = "dashboard.html";
             } else {
-                showError(data.error || data.message || "Failed to update event");
+                showNotification(data.error || data.message || "Failed to update event","error");
             }
         } catch (error) {
-            showError("Server error. Please try again.");
+            showNotification("Server error. Please try again.","error");
         }
     });
 }

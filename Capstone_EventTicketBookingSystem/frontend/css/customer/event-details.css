@@ -1,6 +1,6 @@
 .details-container {
     max-width: 700px;
-    width: 70%;
+    width: 90%;
     margin: 24px auto;
     padding: 0;
     animation: fadeSlideUp 0.4s ease-out;
@@ -13,7 +13,7 @@ body {
     background: #121212;
     border-radius: 32px;
     padding: 36px 48px;
-    border: 1px solid rgba(139, 92, 246, 0.25);
+    border: 1px solid rgb(195, 195, 42);
     box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.6);
     transition: 0.2s ease;
 }
@@ -33,24 +33,6 @@ body {
     margin: 0;
     padding: 0;
 }
-
-.back-btn {
-    color: #a78bfa;
-    text-decoration: none;
-    padding: 0.5rem 1.2rem;
-    background: rgba(139, 92, 246, 0.1);
-    border-radius: 40px;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(139, 92, 246, 0.3);
-}
-
-.back-btn:hover {
-    background: #8b5cf6;
-    color: white;
-    transform: translateX(-5px);
-}
-
-
 
 .event-name {
     font-size: 2.2rem;

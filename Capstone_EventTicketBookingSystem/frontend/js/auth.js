@@ -1,20 +1,34 @@
 const API_BASE = "http://localhost:8081/api/auth";
 
-function showError(message)
-{
+function getToken() {
+    return localStorage.getItem("token");
+}
+
+function logout() {
+    localStorage.clear();
+    window.location.href = "../login.html";
+}
+
+function showNotification(message, type = "error") {
     const popup = document.getElementById("errorPopup");
     const popupMessage = document.getElementById("popupMessage");
+    const popupContent = document.querySelector(".popup-content");
+    
+    if (!popup || !popupMessage || !popupContent) return; 
 
-    if (popup && popupMessage)
-    {
-        popupMessage.textContent = message;
-        popup.style.display = "block";
-
-        setTimeout(
-                    () => {popup.style.display = "none";},
-                    3000
-                  );       
+    if (type === "success") {
+        popupContent.style.borderLeftColor = "#22c55e"; 
+    } else {
+        popupContent.style.borderLeftColor = "#ef4444"; 
     }
+    
+    popupMessage.textContent = message;
+    popup.style.display = "block";
+    
+    setTimeout(() => {
+        popup.style.display = "none";
+        popupContent.style.borderLeftColor = "#ef4444"; 
+    }, 3000);
 }
 
 const closeBtn = document.querySelector(".close-btn");

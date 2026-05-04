@@ -1,11 +1,9 @@
-/* Container */
 .bookings-container {
     max-width: 1000px;
     margin: 40px auto;
     padding: 0 20px;
 }
 
-/* Card */
 .bookings-card {
     background: #121212;
     border-radius: 20px;
@@ -123,23 +121,4 @@ tr:hover {
     border-radius: 6px;
     font-size: 0.8rem;
     font-weight: 500;
-}
-
-.empty-state {
-    text-align: center;
-    padding: 40px;
-    color: #ffffff;
-}
-
-.empty-icon {
-    font-size: 48px;
-    display: block;
-    margin-bottom: 15px;
-}
-
-.empty-state small {
-    font-size: 12px;
-    color: #cccccc;
-    display: block;
-    margin-top: 8px;
 }

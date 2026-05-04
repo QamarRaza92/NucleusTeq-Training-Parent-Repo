@@ -1,13 +1,4 @@
 const EVENT_API  = "http://localhost:8080/api/events";
- 
-function logout() {
-    localStorage.clear();
-    window.location.href = "../login.html";
-}
-
-function getToken() {
-    return localStorage.getItem("token");
-}
 
 function updateDateTime() {
     const now = new Date();
@@ -83,7 +74,7 @@ function displayEvents(events) {
     container.innerHTML = events.map(event => {
         const availableSeats = event.totalSeats - (event.bookedSeats || 0);
         return `
-            <div class="event-card" onclick="goToEventDetails(${event.id})">
+            <div class="event-card" onclick="bookEvent(${event.id})">
                 <div class="event-title">${event.name}</div>
                 <div class="event-details">📍 ${event.venue}</div>
                 <div class="event-details">📅 ${new Date(event.eventDate).toLocaleDateString()}</div>
@@ -95,26 +86,9 @@ function displayEvents(events) {
     }).join("");
 }
 
-function goToEventDetails(eventId) {
-    window.location.href = `event-details.html?id=${eventId}`;
-}
-
 function bookEvent(eventId) {
     window.location.href = `event-details.html?id=${eventId}`;
 }
-
-function showError(message) {
-    const popup = document.getElementById("errorPopup");
-    const popupMessage = document.getElementById("popupMessage");
-    if (popup && popupMessage) {
-        popupMessage.textContent = message;
-        popup.style.display = "block";
-        setTimeout(() => {
-            popup.style.display = "none";
-        }, 3000);
-    }
-}
-
 
 loadCustomerProfile();
 loadEvents();

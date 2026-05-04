@@ -1,34 +1,14 @@
-const API_BASE = "http://localhost:8080/api/events";
+const EVENT_API = "http://localhost:8080/api/events";
 
 function getEventIdFromURL() {
     const params = new URLSearchParams(window.location.search);
     return params.get("id");
 }
 
-function showError(message) {
-    const popup = document.getElementById("errorPopup");
-    const popupMessage = document.getElementById("popupMessage");
-    
-    if (popup && popupMessage) {
-        popupMessage.textContent = message;
-        popup.style.display = "block";
-        setTimeout(() => {
-            popup.style.display = "none";
-        }, 3000);
-    }
-}
-
-const closeBtn = document.querySelector(".close-btn");
-if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
-        document.getElementById("errorPopup").style.display = "none";
-    });
-}
-
 async function loadEventDetails() {
     const eventId = getEventIdFromURL();
     if (!eventId) {
-        showError("No event ID found");
+        showNotification("No event ID found","error");
         window.location.href = "dashboard.html";
         return;
     }
@@ -40,7 +20,7 @@ async function loadEventDetails() {
     }
     
     try {
-        const response = await fetch(`${API_BASE}/${eventId}`, {
+        const response = await fetch(`${EVENT_API}/${eventId}`, {
             headers: { "Authorization": `Bearer ${token}` }
         });
         
@@ -57,7 +37,7 @@ async function loadEventDetails() {
         document.getElementById("cancelBtn").onclick = () => cancelEvent(event.id);
         
     } catch (error) {
-        showError("Failed to load event details");
+        showNotification("Failed to load event details","error");
         console.error(error);
     }
 }
@@ -136,7 +116,7 @@ async function cancelEvent(eventId) {
     const token = localStorage.getItem("token");
     
     try {
-        const response = await fetch(`${API_BASE}/cancel/${eventId}`, {
+        const response = await fetch(`${EVENT_API}/cancel/${eventId}`, {
             method: "PUT",
             headers: { "Authorization": `Bearer ${token}` }
         });
@@ -146,10 +126,10 @@ async function cancelEvent(eventId) {
             window.location.href = "dashboard.html";
         } else {
             const error = await response.json();
-            showError(error.error || "Failed to cancel event");
+            showNotification(error.message || error.error || "Failed to cancel event","error");
         }
     } catch (error) {
-        showError("Server error. Please try again.");
+        showNotification("Server error. Please try again.","error");
     }
 }
 

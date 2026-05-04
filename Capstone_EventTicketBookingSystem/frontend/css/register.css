@@ -69,42 +69,6 @@
     border-radius: 2px;
 }
 
-.register-btn {
-    width: 100%;
-    padding: 15px;
-    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
-    color: white;
-    border: none;
-    border-radius: 14px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 15px;
-    margin-bottom: 20px;
-}
-
-.register-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.4);
-}
-
-.login-link {
-    text-align: center;
-    color: #888888;
-    font-size: 14px;
-}
-
-.login-link a {
-    color: #a78bfa;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.login-link a:hover {
-    text-decoration: underline;
-}
-
 .full-width {
     width: 100%;
 }

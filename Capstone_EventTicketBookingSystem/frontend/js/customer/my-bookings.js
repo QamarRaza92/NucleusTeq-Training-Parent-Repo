@@ -4,18 +4,6 @@ function getToken() {
     return localStorage.getItem("token");
 }
 
-function showError(message) {
-    const popup = document.getElementById("errorPopup");
-    const popupMessage = document.getElementById("popupMessage");
-    if (popup && popupMessage) {
-        popupMessage.textContent = message;
-        popup.style.display = "block";
-        setTimeout(() => {
-            popup.style.display = "none";
-        }, 3000);
-    }
-}
-
 async function loadBookings() {
     const token = getToken();
     if (!token) {
@@ -39,48 +27,50 @@ async function loadBookings() {
         }
 
         container.innerHTML = `
-            <table>
-                <thead>
-                    <tr>
-                        <th>Booking ID</th>
-                        <th>Event ID</th>
-                        <th>Tickets</th>
-                        <th>Total Amount</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${bookings.map(b => {
-                        let statusText = b.status || 'CONFIRMED';
-                        let statusClass = 'status-confirmed';
-                        
-                        if (b.status === 'CANCELLED') {
-                            statusText = 'CANCELLED';
-                            statusClass = 'status-cancelled';
-                        } else if (b.status === 'CANCELLED_BY_ORGANIZER') {
-                            statusText = 'CANCELLED BY ORGANIZER';
-                            statusClass = 'status-cancelled';
-                        }
-                        
-                        return `
-                            <tr>
-                                <td>${b.id}</td>
-                                <td>${b.eventId}</td>
-                                <td>${b.noOfTickets}</td>
-                                <td>₹${b.totalAmount}</td>
-                                <td><span class="status-badge ${statusClass}">${statusText}</span></td>
-                                <td>
-                                    ${b.status !== 'CANCELLED' && b.status !== 'CANCELLED_BY_ORGANIZER' ? 
-                                        `<button class="cancel-btn" onclick="cancelBooking(${b.id})">Cancel</button>` : 
-                                        '<span class="no-action">-</span>'
-                                    }
-                                </td>
-                            </tr>
-                        `;
-                    }).join("")}
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Event ID</th>
+                            <th>Tickets</th>
+                            <th>Total Amount</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${bookings.map(b => {
+                            let statusText = b.status || 'CONFIRMED';
+                            let statusClass = 'status-confirmed';
+                            
+                            if (b.status === 'CANCELLED') {
+                                statusText = 'CANCELLED';
+                                statusClass = 'status-cancelled';
+                            } else if (b.status === 'CANCELLED_BY_ORGANIZER') {
+                                statusText = 'CANCELLED BY ORGANIZER';
+                                statusClass = 'status-cancelled';
+                            }
+                            
+                            return `
+                                <tr>
+                                    <td>${b.id}</td>
+                                    <td>${b.eventId}</td>
+                                    <td>${b.noOfTickets}</td>
+                                    <td>₹${b.totalAmount}</td>
+                                    <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                                    <td>
+                                        ${b.status !== 'CANCELLED' && b.status !== 'CANCELLED_BY_ORGANIZER' ? 
+                                            `<button class="cancel-btn" onclick="cancelBooking(${b.id})">Cancel</button>` : 
+                                            '<span class="no-action">-</span>'
+                                        }
+                                    </td>
+                                </tr>
+                            `;
+                        }).join("")}
+                    </tbody>
+                </table>
+            </div>
         `;
 
     } catch (error) {
@@ -99,14 +89,14 @@ async function cancelBooking(bookingId) {
         });
 
         if (response.ok) {
-            showError("Booking cancelled successfully!");
+            showNotification("Booking cancelled successfully!","success");
             loadBookings();
         } else {
            const err = await response.text();
-            showError(err || "Failed to cancel booking");
+            showNotification(err || "Failed to cancel booking","error");
         }
     } catch (error) {
-        showError("Server error");
+        showNotification("Server error","error");
     }
 }
 

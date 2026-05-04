@@ -9,22 +9,10 @@ function goBack() {
     window.history.back();
 }
 
-function showError(message) {
-    const popup = document.getElementById("errorPopup");
-    const popupMessage = document.getElementById("popupMessage");
-    if (popup && popupMessage) {
-        popupMessage.textContent = message;
-        popup.style.display = "block";
-        setTimeout(() => {
-            popup.style.display = "none";
-        }, 3000);
-    }
-}
-
 async function loadEventDetails() {
     const eventId = getEventId();
     if (!eventId) {
-        showError("No event found");
+        showNotification("No event found","error");
         goBack();
         return;
     }
@@ -69,7 +57,7 @@ async function loadEventDetails() {
         }
 
     } catch (error) {
-        showError("Failed to load event details");
+        showNotification("Failed to load event details","error");
     }
 }
 

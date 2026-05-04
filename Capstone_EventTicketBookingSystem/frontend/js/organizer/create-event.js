@@ -1,24 +1,4 @@
-const API_BASE = "http://localhost:8080/api/events";
-
-function showError(message) {
-    const popup = document.getElementById("errorPopup");
-    const popupMessage = document.getElementById("popupMessage");
-    
-    if (popup && popupMessage) {
-        popupMessage.textContent = message;
-        popup.style.display = "block";
-        setTimeout(() => {
-            popup.style.display = "none";
-        }, 3000);
-    }
-}
-
-const closeBtn = document.querySelector(".close-btn");
-if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
-        document.getElementById("errorPopup").style.display = "none";
-    });
-}
+const EVENT_API = "http://localhost:8080/api/events";
 
 if (document.getElementById("createEventForm")) {
     document.getElementById("createEventForm").addEventListener("submit", async (e) => {
@@ -35,7 +15,7 @@ if (document.getElementById("createEventForm")) {
         const category = document.getElementById("category").value;
         
         if (!name || !description || !eventDate || !startTime || !endTime || !venue || !totalSeats || !price) {
-            showError("Please fill all required fields");
+            showNotification("Please fill all required fields","error");
             return;
         }
         
@@ -43,7 +23,7 @@ if (document.getElementById("createEventForm")) {
         let endDateTime = new Date(`${eventDate}T${endTime}`);
 
         if (endDateTime <= eventDateTime) {
-            showError("End time must be after start time");
+            showNotification("End time must be after start time","error");
             return;
         }
         
@@ -51,7 +31,7 @@ if (document.getElementById("createEventForm")) {
         const organizerId = localStorage.getItem("userId");
         
         if (!token || !organizerId) {
-            showError("Please login again");
+            showNotification("Please login again","error");
             window.location.href = "../login.html";
             return;
         }
@@ -69,7 +49,7 @@ if (document.getElementById("createEventForm")) {
         };
         
         try {
-            const response = await fetch(`${API_BASE}/create`, {
+            const response = await fetch(`${EVENT_API}/create`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -84,10 +64,10 @@ if (document.getElementById("createEventForm")) {
                 alert("🎉 Event created successfully!");
                 window.location.href = "dashboard.html";
             } else {
-                showError(data.error || data.message || "Failed to create event");
+                showNotification(data.error || data.message || "Failed to create event","error");
             }
         } catch (error) {
-            showError("Server error. Please try again.");
+            showNotification("Server error. Please try again.","error");
         }
     });
 }

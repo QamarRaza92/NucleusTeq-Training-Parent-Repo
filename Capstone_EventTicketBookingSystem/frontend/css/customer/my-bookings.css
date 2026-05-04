@@ -8,7 +8,7 @@
     background: #121212;
     border-radius: 20px;
     padding: 30px;
-    border: 1px solid #2a2a2a;
+    border: 1px solid rgb(196, 196, 31);
 }
 
 .bookings-header {
@@ -23,11 +23,6 @@
 .bookings-header h2 {
     color: white;
     margin: 0;
-}
-
-.back-link {
-    color: #8b5cf6;
-    text-decoration: none;
 }
 
 .bookings-list {
@@ -61,40 +56,6 @@ th {
 
 .cancel-btn:hover {
     opacity: 0.9;
-}
-
-.loading, .empty-state {
-    text-align: center;
-    padding: 40px;
-    color: #888;
-}
-
-.popup {
-    display: none;
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-    min-width: 300px;
-    animation: slideIn 0.3s ease;
-}
-
-.popup-content {
-    background: #1e1e1e;
-    border-left: 4px solid #ef4444;
-    border-radius: 12px;
-    padding: 16px 20px;
-}
-
-.popup-content p {
-    color: white;
-    margin: 0;
-}
-
-.close-btn {
-    float: right;
-    cursor: pointer;
-    color: #888;
 }
 
 .bookings-header h2 {
@@ -131,13 +92,7 @@ th {
     color: #555;
 }
 
-@keyframes slideIn {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
 }
