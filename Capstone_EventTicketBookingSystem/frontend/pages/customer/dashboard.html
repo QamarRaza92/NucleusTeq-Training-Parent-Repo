@@ -6,38 +6,39 @@
     <title>Customer Dashboard</title>
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/customer/customer-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="dashboard-container">
         <aside class="sidebar">
             <div class="logo">
-                <span class="logo-icon">🎪</span>
+                <span class="logo-icon"><i class="fas fa-calendar-check" style="color: yellow;"></i></span>
                 <span>EventHub</span>
             </div>
             
             <div class="profile-section">
-                <div class="avatar" id="avatar">👤</div>
+                <div class="avatar" id="avatar"><i class="fas fa-user-circle"></i></div>
                 <h3 id="userName">Customer</h3>
                 <p id="userEmail">customer@example.com</p>
             </div>
 
             <nav class="nav-menu">
                 <a href="dashboard.html" class="nav-item active">
-                    <span>📅</span>
+                    <span><i class="fas fa-calendar-alt"></i></span>
                     <span>Upcoming Events</span>
                 </a>
                 <a href="past-events.html" class="nav-item">
-                    <span>📅</span>
+                    <span><i class="fas fa-calendar-alt" style="color: white;"></i></span>
                     <span>Past Events</span>
                 </a>
                 <a href="my-bookings.html" class="nav-item">
-                    <span>🎫</span>
+                    <span><i class="fas fa-ticket-alt" style="color: yellow;"></i></span>
                     <span>My Bookings</span>
                 </a>
             </nav>
 
             <button class="logout-btn" onclick="logout()">
-                <span>🚪</span>
+                <span><i class="fas fa-sign-out-alt"></i></span>
                 <span>Logout</span>
             </button>
         </aside>
@@ -45,7 +46,7 @@
         <main class="main-content">
             <div class="top-bar">
                 <div class="welcome-text">
-                    <h1>Welcome, <span id="welcomeName">Customer</span> ✨</h1>
+                    <h1>Welcome, <span id="welcomeName">Customer</span> <i class="fas fa-sparkles"></i></h1>
                     <p>Discover and book amazing events</p>
                 </div>
                 <div class="date-time" id="currentDateTime"></div>

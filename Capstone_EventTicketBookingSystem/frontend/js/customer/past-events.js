@@ -26,10 +26,10 @@ function displayEvents(events) {
         <div class="event-card">
             <span class="badge">PAST EVENT</span>
             <div class="event-title">${event.name}</div>
-            <div class="event-details">📍 ${event.venue}</div>
-            <div class="event-details">📅 ${new Date(event.eventDate).toLocaleDateString()}</div>
+            <div class="event-details"><i class="fa-solid fa-location-pin" style="color:red"></i> ${event.venue}</div>
+            <div class="event-details"><i class="fas fa-calendar-alt" style="color:white"></i> ${new Date(event.eventDate).toLocaleDateString()}</div>
             <div class="price">₹${event.price}</div>
-            <div class="available-seats">✅ ${event.totalSeats - (event.bookedSeats || 0)} seats available</div>
+            <div class="available-seats"><i class="fas fa-check-circle"></i> ${event.totalSeats - (event.bookedSeats || 0)} seats available</div>
         </div>
     `).join("");
 }

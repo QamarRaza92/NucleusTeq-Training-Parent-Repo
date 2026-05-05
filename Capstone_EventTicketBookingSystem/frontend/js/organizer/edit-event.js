@@ -108,6 +108,7 @@ if (document.getElementById("editEventForm")) {
             
             if (response.ok) {
                 alert("✅ Event updated successfully!");
+                showNotification("✅ Event updated successfully!","success");
                 window.location.href = "dashboard.html";
             } else {
                 showNotification(data.error || data.message || "Failed to update event","error");

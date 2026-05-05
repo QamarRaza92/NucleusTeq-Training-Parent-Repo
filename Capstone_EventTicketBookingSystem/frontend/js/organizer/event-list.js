@@ -34,9 +34,9 @@ function displayEvents(events) {
     container.innerHTML = events.map(event => `
         <div class="event-card">
             <div class="event-title">${event.name}</div>
-            <div class="event-details">📍 ${event.venue}</div>
-            <div class="event-details">📅 ${new Date(event.eventDate).toLocaleDateString()}</div>
-            <div class="available-seats">✅ ${event.totalSeats - (event.bookedSeats || 0)} seats available</div>
+            <div class="event-details"><i class="fa-solid fa-location-dot" style="color: #e67e22;"></i> ${event.venue}</div>
+            <div class="event-details"><i class="fa-solid fa-calendar-days" style="color: #3498db;"></i> ${new Date(event.eventDate).toLocaleDateString()}</div>
+            <div class="available-seats"><i class="fa-solid fa-circle-check" style="color: #28a745;"></i> ${event.totalSeats - (event.bookedSeats || 0)} seats available</div>
             <div class="actions">
                 ${event.status === 'ACTIVE' ? 
                     `<a href="edit-event.html?id=${event.id}" class="edit-btn">Edit</a>

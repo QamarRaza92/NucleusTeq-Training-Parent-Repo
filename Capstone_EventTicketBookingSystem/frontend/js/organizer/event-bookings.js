@@ -31,7 +31,7 @@ async function loadBookings() {
         console.error(error);
         document.getElementById("bookingsList").innerHTML = `
             <div class="empty-state">
-                <span class="empty-icon">⚠️</span>
+                <span class="empty-icon"><i class="fa-solid fa-triangle-exclamation" style="color: #ffc107;"></i> </span>
                 <p>Could not load bookings</p>
             </div>`;
     }

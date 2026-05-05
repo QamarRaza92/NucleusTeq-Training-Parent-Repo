@@ -62,6 +62,7 @@ if (document.getElementById("createEventForm")) {
             
             if (response.ok) {
                 alert("🎉 Event created successfully!");
+                showNotification("🎉 Event created successfully!","success");
                 window.location.href = "dashboard.html";
             } else {
                 showNotification(data.error || data.message || "Failed to create event","error");

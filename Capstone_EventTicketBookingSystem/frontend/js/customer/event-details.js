@@ -67,50 +67,50 @@ function displayEventDetails(event,organizer) {
     const eventDate = new Date(event.eventDate);
     let statusBadge = '';
     if (event.status === 'CANCELLED') {
-        statusBadge = '<span class="status-badge status-cancelled">❌ CANCELLED</span>';
+        statusBadge = '<span class="status-badge status-cancelled"><i class="fas fa-times-circle"></i> CANCELLED</span>';
     } else if (event.status === 'COMPLETED') {
-        statusBadge = '<span class="status-badge status-completed">✅ COMPLETED</span>';
+        statusBadge = '<span class="status-badge status-completed"><i class="fas fa-check-circle" style="color: green;"></i> COMPLETED</span>';
     } else if (eventDate > now) {
-        statusBadge = '<span class="status-badge status-active">🟢 UPCOMING</span>';
+        statusBadge = '<span class="status-badge status-active"><i class="fas fa-circle" style="color: #28a745;"></i> UPCOMING</span>';
     } else {
-        statusBadge = '<span class="status-badge status-completed">✅ COMPLETED</span>';
+        statusBadge = '<span class="status-badge status-completed"><i class="fas fa-check-circle" style="color: green;"></i> COMPLETED</span>';
     }
 
     document.getElementById("eventDetails").innerHTML = `
-        <div class="event-name">${event.name}</div>
-        <div class="event-description">${event.description || "No description available"}</div>
+        <div class="event-name"><i class="fa-solid fa-microphone" style="color: #6c5ce7;"></i> ${event.name}</div>
+        <div class="event-description"><i class="fa-solid fa-align-left" style="color: #636e72;"></i> ${event.description || "No description available"}</div>
         <div class="info-row">
-            <div class="info-label">Date:</div>
+            <div class="info-label"><i class="fa-solid fa-calendar-day" style="color: #0984e3;"></i> Date:</div>
             <div class="info-value">${new Date(event.eventDate).toLocaleDateString()}</div>
         </div>
         <div class="info-row">
-            <div class="info-label">Time:</div>
+            <div class="info-label"><i class="fa-solid fa-clock" style="color: #fdcb6e;"></i> Time:</div>
             <div class="info-value">${event.startTime?.split('T')[1]?.substring(0,5) || 'N/A'} - ${event.endTime?.split('T')[1]?.substring(0,5) || 'N/A'}</div>
         </div>
         <div class="info-row">
-            <div class="info-label">Venue:</div>
+            <div class="info-label"><i class="fa-solid fa-location-dot" style="color: #d63031;"></i> Venue:</div>
             <div class="info-value">${event.venue}</div>
         </div>
         <div class="info-row">
-            <div class="info-label">Category:</div>
+            <div class="info-label"><i class="fa-solid fa-tags" style="color: #00cec9;"></i> Category:</div>
             <div class="info-value">${event.category || "General"}</div>
         </div>
         <div class="info-row">
-            <div class="info-label">Price:</div>
+            <div class="info-label"><i class="fa-solid fa-indian-rupee-sign" style="color: #27ae60;"></i> Price:</div>
             <div class="info-value">₹${event.price} per ticket</div>
         </div>
         <div class="info-row">
-            <div class="info-label">📌 Status:</div>
+            <div class="info-label"><i class="fa-solid fa-circle-check" style="color: #2ecc71;"></i> Status:</div>
             <div class="info-value">${statusBadge}</div>
         </div>
         <div class="info-row organizer-info">
-            <div class="info-label">🎪 Organized by:</div>
+            <div class="info-label"><i class="fa-solid fa-tent-canopy"></i> Organized by:</div>
             <div class="info-value">
                 <strong>${organizer?.name || 'Organizer'}</strong>
                 ${organizer?.email ? `<br><span class="organizer-email">${organizer.email}</span>` : ''}
             </div>
         </div>
-        <div class="available-seats">✅ ${availableSeats} seats available</div>
+        <div class="available-seats"><i class="fas fa-check-circle" style="color: green;"></i> ${availableSeats} seats available</div>
     `;
 }
 

@@ -47,13 +47,13 @@ function displayEventDetails(event) {
     const eventDate = new Date(event.eventDate);
      let statusBadge = '';
     if (event.status === 'CANCELLED') {
-        statusBadge = '<span class="status-badge status-cancelled">❌ CANCELLED</span>';
+        statusBadge = '<span class="status-badge status-cancelled"><i class="fa-solid fa-circle-xmark" style="color: #dc3545;"></i> CANCELLED</span>';
     } else if (event.status === 'COMPLETED') {
-        statusBadge = '<span class="status-badge status-completed">✅ COMPLETED</span>';
+        statusBadge = '<span class="status-badge status-completed"><i class="fa-solid fa-circle-check" style="color: #28a745;"></i> COMPLETED</span>';
     } else if (eventDate > now) {
-        statusBadge = '<span class="status-badge status-active">🟢 UPCOMING</span>';
+        statusBadge = '<span class="status-badge status-active"><i class="fa-solid fa-circle" style="color: #28a745;"></i> UPCOMING</span>';
     } else {
-        statusBadge = '<span class="status-badge status-completed">✅ COMPLETED</span>';
+        statusBadge = '<span class="status-badge status-completed"><i class="fa-solid fa-circle-check" style="color: #28a745;"></i> COMPLETED</span>';
     }
     
     const availableSeats = event.totalSeats - (event.bookedSeats || 0);
@@ -61,35 +61,35 @@ function displayEventDetails(event) {
     const container = document.getElementById("eventInfo");
     container.innerHTML = `
         <div class="info-row">
-            <div class="info-label">Event Name:</div>
+            <div class="info-label"><i class="fa-solid fa-microphone" style="color: #6c5ce7;"></i> Event Name:</div>
             <div class="info-value">${event.name}</div>
         </div>
         <div class="info-row">
-            <div class="info-label">Description:</div>
+            <div class="info-label"><i class="fa-solid fa-align-left" style="color: #636e72;"></i> Description:</div>
             <div class="info-value">${event.description || "-"}</div>
         </div>
         <div class="info-row">
-            <div class="info-label">Date:</div>
+            <div class="info-label"><i class="fa-solid fa-calendar-day" style="color: #0984e3;"></i> Date:</div>
             <div class="info-value">${new Date(event.eventDate).toLocaleDateString()}</div>
         </div>
         <div class="info-row">
-            <div class="info-label">Time:</div>
+            <div class="info-label"><i class="fa-solid fa-clock" style="color: #fdcb6e;"></i> Time:</div>
             <div class="info-value">${event.startTime.split('T')[1].substring(0,5)} - ${event.endTime.split('T')[1].substring(0,5)}</div>
         </div>
         <div class="info-row">
-            <div class="info-label">Venue:</div>
+            <div class="info-label"><i class="fa-solid fa-location-dot" style="color: #d63031;"></i> Venue:</div>
             <div class="info-value">${event.venue}</div>
         </div>
         <div class="info-row">
-            <div class="info-label">Category:</div>
+            <div class="info-label"><i class="fa-solid fa-tags" style="color: #00cec9;"></i> Category:</div>
             <div class="info-value">${event.category || "-"}</div>
         </div>
         <div class="info-row">
-            <div class="info-label">Price:</div>
+            <div class="info-label"><i class="fa-solid fa-indian-rupee-sign" style="color: #27ae60;"></i> Price:</div>
             <div class="info-value">₹${event.price}</div>
         </div>
         <div class="info-row">
-            <div class="info-label">Status:</div>
+            <div class="info-label"><i class="fa-solid fa-circle-check" style="color: #2ecc71;"></i> Status:</div>
             <div class="info-value">${statusBadge}</div>
         </div>
         
