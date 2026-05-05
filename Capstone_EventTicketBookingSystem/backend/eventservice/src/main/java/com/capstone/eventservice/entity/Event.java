@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
 import java.math.BigDecimal;
-
+import com.capstone.eventservice.validation.Create;
 @Entity 
 @Table(name="events")
 public class Event
@@ -23,15 +23,15 @@ public class Event
     private String description;
 
     @Column(name = "event_date", nullable=false)
-    @FutureOrPresent(message = "Event date must be in future")
+    @FutureOrPresent(message = "Event date must be in future",groups = {Create.class})
     private LocalDateTime eventDate;
 
     @Column(name = "start_time", nullable=false)
-    @FutureOrPresent(message = "Start time must be in future")
+    @FutureOrPresent(message = "Start time must be in future",groups = {Create.class})
     private LocalDateTime startTime;
 
     @Column(name = "end_time", nullable=false)
-    @FutureOrPresent(message = "End time must be in future")
+    @FutureOrPresent(message = "End time must be in future",groups = {Create.class})
     private LocalDateTime endTime;
 
     @Column(name = "venue", nullable=false)

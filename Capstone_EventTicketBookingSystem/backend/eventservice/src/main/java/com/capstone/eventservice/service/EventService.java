@@ -215,7 +215,7 @@ public class EventService
     }
 
     //To update event status in every hour based on its date.
-    @Scheduled(cron = "0 0 * * * *")
+    @Scheduled(cron="0 0 * * * *")
     @Transactional
     public void updateEventStatus()
     {
