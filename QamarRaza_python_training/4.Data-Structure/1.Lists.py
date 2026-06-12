@@ -21,5 +21,6 @@ print("-"*30)
 
 # 27. Reverse a list without using reverse()
 print("Q27. Reverse a List Without Using reverse()")
-print(f"Reversed list: {my_list[::-1]}")
+new_list = [34,22,6,42,45,78,12,33]
+print(f"Reversed list: {new_list[::-1]}")
 print("-"*30)

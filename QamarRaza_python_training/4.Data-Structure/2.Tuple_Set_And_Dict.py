@@ -30,9 +30,9 @@ print("-"*30)
 print("Q32. Create Student Dictionary and Access Values")
 student = {"name":"Qamar","age":21,"cgpa":9.1}
 print("Student Dictionary:- ")
-print("name",student["name"])
-print("age",student["age"])
-print("cgpa",student["cgpa"])
+print("Name: ",student["name"])
+print("Age: ",student["age"])
+print("CGPA: ",student["cgpa"])
 print("-"*30)
 
 # 33. Count frequency of characters in a string using dictionary.
