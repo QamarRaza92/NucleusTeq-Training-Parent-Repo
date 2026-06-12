@@ -12,3 +12,6 @@ print("Random number between 1 and 10: ",random.randint(1,10))
 print("-"*30)
 
 # 24. Create your own module and import it.
+import add 
+print("4+5 = ",add.Addition(4,5))
+print("-"*30)
