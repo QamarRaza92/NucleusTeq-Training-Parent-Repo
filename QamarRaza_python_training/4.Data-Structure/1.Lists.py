@@ -1,0 +1,22 @@
+# 25. Create a list of 10 numbers and find sum, max, sort it, and remove duplicates.
+my_list = [4,2,5,3,4,6,3,5,2,8]
+print(f"Max: {max(my_list)}")
+print(f"Sum: {sum(my_list)}")
+my_list.sort(reverse=True)
+print(f"Sorted List: {my_list}")
+print(f"List(without duplicates): {list(set(my_list))}")
+print("-"*30)
+
+# 26. Count even and odd numbers in a list.
+evens = odds = 0
+for k in [5,1,7,8,3,5,7,2,8,4,41,46]:
+    if k%2==0:
+        evens+=1
+    else:
+        odds+=1
+print(f"Total no. of even values: {evens}\nTotal no. of odds values: {odds}\n")
+print("-"*30)
+
+# 27. Reverse a list without using reverse()
+print(f"Reversed list: {my_list[::-1]}")
+print("-"*30)
