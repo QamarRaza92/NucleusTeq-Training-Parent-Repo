@@ -1,10 +1,12 @@
 # 12. Print numbers from 1 to 100 using loop.
+print("Q12. Print Numbers From 1 to 100 Using Loop")
 print("Numbers from 1 - 100")
 for k in range(1,101):
     print(k)
 print("-"*30)
 
 # 13. Print multiplication table of a number.
+print("Q13. Print Multiplication Table of a Number")
 num = int(input("Enter a number: "))
 print(f"Multiplication table of {num}:-")
 for k in range(1,11):
@@ -12,6 +14,7 @@ for k in range(1,11):
 print("-"*30)
 
 # 14. Find factorial of a number.
+print("Q14. Find Factorial of a Number")
 num = int(input("Enter a number: "))
 if num < 0:
     print("Factorial does not exist for negative numbers")
@@ -23,6 +26,7 @@ else:
 print("-"*30)
 
 # 15. Reverse a number using loop.
+print("Q15. Reverse a Number Using Loop")
 num = int(input("Enter a number: "))
 reversed = ''
 temp = num 
@@ -34,6 +38,7 @@ print("-"*30)
 
 
 # 16. Check whether a number is prime.
+print("Q16. Check Whether a Number is Prime")
 num = int(input("Enter a number: "))
 counter = 0
 for k in range(1,num+1):

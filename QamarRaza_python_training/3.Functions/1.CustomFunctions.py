@@ -28,7 +28,18 @@ def DefaultParams(name,section="DS",university="Medicaps"):
     print("Student details:-")
     print(f"Name: {name}\nSection: {section}\nUniversity: {university}")
 
+
+print("Q17. Find Square of a Number Using Function")
 print(Square(6))
+
+
+print("Q18. Check Palindrome (Number and String)")
 CheckPalindrome(452)
+
+
+print("Q19. Find Maximum Number from a List")
 print(Max([1,5,22,4,5,22,4]))
+
+
+print("Q20. Function Using Default Parameters")
 DefaultParams(name="Qamar")
