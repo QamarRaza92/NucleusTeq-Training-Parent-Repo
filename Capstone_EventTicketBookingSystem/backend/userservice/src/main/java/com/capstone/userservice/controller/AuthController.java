@@ -17,7 +17,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+// import org.springframework.security.crypto.password.PasswordEncoder; 
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -38,8 +38,8 @@ public class AuthController
     @Autowired
     JwtUtil jwtUtil;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
+    // @Autowired
+    // PasswordEncoder passwordEncoder; (Removed this logic from controller to service)
 
     @Autowired
     AuthenticationManager authenticationManager;
@@ -116,3 +116,5 @@ public class AuthController
         return ResponseEntity.ok(response);
     }
 }   
+
+//Can implement global exception handler to avoid code repetition.

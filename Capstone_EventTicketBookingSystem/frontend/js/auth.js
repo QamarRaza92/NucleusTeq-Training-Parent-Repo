@@ -98,32 +98,32 @@ if(document.getElementById("registerForm"))
 
                                             if(!name || !email || !password || !phone || !role)
                                             {
-                                                showError("Please fill all fields");
+                                                showNotification("Please fill all fields");
                                                 return;
                                             }
 
                                             const passwordCheck = isValidPassword(password);
                                             if(!passwordCheck.valid)
                                             {
-                                                showError(passwordCheck.message);
+                                                showNotification(passwordCheck.message);
                                                 return;
                                             }
 
                                             const nameCheck = isValidName(name);
                                             if (!nameCheck.valid) {
-                                                showError(nameCheck.message);
+                                                showNotification(nameCheck.message);
                                                 return;
                                             }
 
                                             const emailCheck = isValidEmail(email);
                                             if (!emailCheck.valid) {
-                                                showError(emailCheck.message);
+                                                showNotification(emailCheck.message);
                                                 return;
                                             }
 
                                             const phoneCheck = isValidPhone(phone);
                                             if (!phoneCheck.valid) {
-                                                showError(phoneCheck.message);
+                                                showNotification(phoneCheck.message);
                                                 return;
                                             }
 
@@ -147,12 +147,12 @@ if(document.getElementById("registerForm"))
                                                 }
                                                 else
                                                 {
-                                                    showError(data.error || "Registration Failed!");
+                                                    showNotification(data.error || "Registration Failed!");
                                                 }
                                             }
                                             catch(error)
                                             {
-                                                showError("Server error. Please try again.");
+                                                showNotification("Server error. Please try again.");
                                             }
                                             
                                             }
@@ -169,7 +169,7 @@ if (document.getElementById("loginForm"))
 
                                     if(!email || !password)
                                     {
-                                        showError("Please fill all fields");
+                                        showNotification("Please fill all fields","error");
                                         return;
                                     }
                                     try 
@@ -202,13 +202,13 @@ if (document.getElementById("loginForm"))
                                             }
                                             else 
                                             {
-                                                showError(data.error || "Invalid email or password");
+                                                showNotification(data.error || "Invalid email or password","error");
                                             }
                                         }
                                     }
                                     catch(error)
                                     {
-                                        showError("Server error. Please try again.");
+                                        showNotification("Server error. Please try again.","error");
                                     }
                                 }
                                 );
