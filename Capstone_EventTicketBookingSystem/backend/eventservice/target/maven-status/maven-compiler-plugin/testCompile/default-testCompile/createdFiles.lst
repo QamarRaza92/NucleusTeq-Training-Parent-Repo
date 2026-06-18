@@ -1,0 +1,4 @@
+com\capstone\eventservice\exception\GlobalExceptionHandlerTest.class
+com\capstone\eventservice\security\JwtUtilTest.class
+com\capstone\eventservice\service\EventServiceTest.class
+com\capstone\eventservice\service\BookingServiceTest.class
