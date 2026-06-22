@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/customer/payment.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="payment-container">
+        <div class="payment-card">
+            <h2><i class="fas fa-credit-card" style="color: rgb(28, 130, 219);"></i> Payment</h2>
+            <p>Event ID: <span id="eventId"></span></p>
+            <p>Tickets: <span id="tickets"></span></p>
+            <div class="amount">₹<span id="amount"></span></div>
+            <button id="payBtn" class="pay-btn" onclick="processPayment()">Pay Now</button>
+            <div id="loader" class="loader">Processing...</div>
+        </div>
+    </div>
+    <div id="errorPopup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <p id="popupMessage"></p>
+        </div>
+    </div>
+    <script src="../../js/auth.js"></script>
+    <script src="../../js/customer/payment.js"></script>
+</body>
+</html>

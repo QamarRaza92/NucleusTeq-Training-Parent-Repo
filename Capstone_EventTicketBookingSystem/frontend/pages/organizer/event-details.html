@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/organizer/event-details.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="details-container">
+        <div class="details-card">
+            <div class="card-header">
+                <h1><i class="fa-solid fa-clipboard-list" style="color: #F39C12;"></i> Event Details</h1>
+                <a href="dashboard.html" class="btn-back">Back</a>
+            </div>
+
+            <div id="eventInfo" class="event-info">
+                <div class="loading">Loading event details...</div>
+            </div>
+
+            <div class="action-buttons" id="actionButtons" style="display: none;">
+                <a href="#" id="editLink" class="edit-btn"><i class="fa-solid fa-pen" style="color: rgb(51, 247, 11);"></i> Edit Event</a>
+                <button id="cancelBtn" class="cancel-btn"><i class="fa-solid fa-circle-xmark" style="color: rgb(255, 238, 0);"></i> Cancel Event</button>
+            </div>
+
+            <div class="bookings-section" id="bookingsSection" style="display: none;">
+                <h2><i class="fa-solid fa-thumbtack" style="color: #9b59b6;"></i> Attendees List</h2>
+                <div id="attendeesList"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="errorPopup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <p id="popupMessage"></p>
+        </div>
+    </div>
+
+    <script src="../../js/auth.js"></script>
+    <script src="../../js/organizer/event-details.js"></script>
+</body>
+</html>
