@@ -59,13 +59,11 @@ if(document.getElementById("registerForm"))
                                                                          const city = document.getElementById("city").value;
                                                                          const bio = document.getElementById("bio").value;
 
-                                                                         if (!name || !email || !password || !phone || !city)
+                                                                         if (!name || !email || !password || !phone_number || !city)
                                                                          {
                                                                             showNotification("Please fill all fields!");
                                                                             return;
                                                                          }
-
-                                                                         let my_bio = document.getElementById("bio").value;
 
                                                                          try 
                                                                          {
@@ -78,11 +76,10 @@ if(document.getElementById("registerForm"))
                                                                                                          }
                                                                                                         );
                                                                             const data = await response.json();
-
                                                                             if (response.ok)
                                                                             {
                                                                                 alert("Registration successful! Please login");
-                                                                                window.location.href = "login.html"
+                                                                                window.location.href = "/login"
                                                                             }
                                                                             else 
                                                                             {
@@ -125,12 +122,18 @@ if (document.getElementById("loginForm"))
                                         const data = await response.json();
                                         if(response.ok)
                                         {
+                                            alert("login success")
+                                            
+
+                                            console.log("Login success")
+
                                             localStorage.setItem("token",data.access_token);
                                             localStorage.setItem("user_id",data.id);
                                             localStorage.setItem("user_name",data.name);
                                             localStorage.setItem("user_email", data.email);
 
-                                            window.location.href = "dashboard.html"
+                                            console.log("Redirecting to:", "/dashboard")
+                                            window.location.href = "/dashboard";
                                         }
 
                                         else
