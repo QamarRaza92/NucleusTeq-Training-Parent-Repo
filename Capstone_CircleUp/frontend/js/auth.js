@@ -1,12 +1,12 @@
 const API_BASE = "http://127.0.0.1:8000";
 
 function getToken(){
-    return localStorage.getItem("token");
+    return sessionStorage.getItem("token");
 }
 
 function logout(){
-    localStorage.clear();
-    window.location.href = "../login.html";
+    sessionStorage.clear();
+    window.location.href = "/";
 }
 
 
@@ -79,7 +79,7 @@ if(document.getElementById("registerForm"))
                                                                             if (response.ok)
                                                                             {
                                                                                 alert("Registration successful! Please login");
-                                                                                window.location.href = "/login"
+                                                                                window.location.href = "/";
                                                                             }
                                                                             else 
                                                                             {
@@ -88,7 +88,7 @@ if(document.getElementById("registerForm"))
                                                                          }
                                                                          catch(error)
                                                                          {
-                                                                            showNotification("Internal error", error.detail);
+                                                                            showNotification("Internal error: ", error);
                                                                          }
                                                                         }
                                                            );
@@ -123,27 +123,25 @@ if (document.getElementById("loginForm"))
                                         if(response.ok)
                                         {
                                             alert("login success")
-                                            
 
                                             console.log("Login success")
 
-                                            localStorage.setItem("token",data.access_token);
-                                            localStorage.setItem("user_id",data.id);
-                                            localStorage.setItem("user_name",data.name);
-                                            localStorage.setItem("user_email", data.email);
-
-                                            console.log("Redirecting to:", "/dashboard")
+                                            sessionStorage.setItem("token",data.access_token);
+                                            sessionStorage.setItem("user_id",data.id);
+                                            sessionStorage.setItem("user_name",data.name);
+                                            sessionStorage.setItem("user_email", data.email);
                                             window.location.href = "/dashboard";
                                         }
 
                                         else
                                         {
-                                            showNotification(data.detail || "Login failed", "error")
+                                            console.log(data);
+                                            showNotification("Login failed! Invalid Email or Pasword", "error")
                                         }
                                     }
                                     catch(error)
                                     {
-                                        showNotification("Server error. Please try again.","error");
+                                        showNotification(error);
                                     }
                                 }
                                 );

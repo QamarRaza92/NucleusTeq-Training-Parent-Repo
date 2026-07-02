@@ -27,6 +27,15 @@
     margin-bottom: 10px;
 }
 
+select{
+    cursor:pointer;
+    appearance: auto;
+}
+
+select option{
+    padding:10px;
+}
+
 .card-header p {
     color: #888888;
     font-size: 15px;
@@ -46,7 +55,7 @@
 
 .password-requirements li {
     font-size: 11px;
-    color: #555555;
+    color: yellow;
     transition: color 0.3s ease;
 }
 

@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #2e1065 100%);
+    background:linear-gradient(135deg,#1b3b5c,#2d4e6e,#1f5e5e);
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -194,6 +194,13 @@ select option {
 .close-btn:hover {
     color: #ffffff;
 }
+
+.required {
+  color: #dc3545; 
+  margin-left: 4px;
+  font-weight: bold;
+}
+
 
 
 @keyframes slideIn {
