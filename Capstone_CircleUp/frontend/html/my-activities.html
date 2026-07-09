@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CircleUp · My Activities</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="/static/css/browse-activities.css">
+  <link rel="stylesheet" href="/static/css/my-activities.css">
+
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <i class="fa-solid fa-users"></i>
+      CircleUp
+    </div>
+    <div class="right">
+      <button onclick="window.location.href='/dashboard'" class="logout-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+        Dashboard
+      </button>
+      <button onclick="window.location.href='/profile'" class="logout-btn">
+        <i class="fa-solid fa-user"></i>
+        Profile
+      </button>
+      <button onclick="logout()" class="logout-btn">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+      </button>
+    </div>
+  </header>
+
+    <div class="tab-buttons">
+        <button id="createdBtn" class="tab-btn active">
+            <i class="fa-solid fa-calendar-plus"></i>
+            Created Activities
+        </button>
+        <button id="joinedBtn" class="tab-btn">
+            <i class="fa-solid fa-user-check"></i>
+            Joined Activities
+        </button>
+        <button id="pendingBtn" class="tab-btn">
+            <i class="fa-solid fa-hourglass-half"></i>
+            Requested to join
+        </button>
+        <button id="rejectedBtn" class="tab-btn">
+            <i class="fa-solid fa-circle-xmark"></i>
+            Rejected requests
+        </button>
+    </div>
+
+  <div class="content">
+    <h2>Browse Activities</h2>
+
+    <div class="filters">
+      <input type="text" id="searchBox" placeholder="Search activity...">
+      <select id="category">
+        <option value="">All Categories</option>
+        <option value="SPORTS">Sports</option>
+        <option value="EDUCATION">Education</option>
+        <option value="MUSIC">Music</option>
+        <option value="ART">Art</option>
+        <option value="CHARITY">Charity</option>
+        <option value="CORPORATE">Corporate</option>
+      </select>
+      <select id="location">
+        <option value="">All Cities</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="New Delhi">New Delhi</option>
+            <option value="Bengaluru">Bengaluru</option>
+            <option value="Indore">Indore</option>
+            <option value="california">California</option>
+            <option value="Alburquerque">Alburquerque</option>
+            <option value="New York">New York</option>
+            <option value="Scranton">Scranton</option>
+            <option value="Pune">Pune</option>
+            <option value="Patna">Patna</option>
+            <option value="Jaipur">Jaipur</option>
+            <option value="Lucknow">Lucknow</option>
+            <option value="Hyderabad">Hyderabad</option>
+      </select>
+      <select id="sort">
+          <option value="">Sort By</option>
+          <option value="date_asc">📅 Date (Oldest First)</option>
+          <option value="date_desc">📅 Date (Newest First)</option>
+      </select>
+      <button id="searchBtn">Search</button>
+    </div>
+
+    <div id="activityContainer"></div>
+  </div>
+
+    <div id="errorPopup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <p id="popupMessage"></p>
+        </div>
+    </div>
+<script src="/static/js/auth.js"></script>
+<script src="/static/js/browse-activities.js"></script>
+<script src="/static/js/my-activities.js"></script>
+</body>
+</html>
