@@ -1,56 +1,48 @@
-from fastapi import APIRouter,Depends,HTTPException,status
+from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
+
 from app.db.database import get_db
-from app.models.user import User
-from app.schemas.register_dto import RegisterRequest,RegisterResponse
-from app.schemas.login_dto import LoginRequest,LoginResponse
-from app.utils.hashing import hash_password,verify_password
-from app.utils.jwt import create_access_token
-import logging 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+from app.schemas.register_dto import RegisterRequest, RegisterResponse
+from app.schemas.login_dto import LoginRequest, LoginResponse
+from app.services.auth_service import register_user, login_user
+
+router = APIRouter(prefix="/auth",tags=["Authentication"])
+
+
+@router.post("/register", response_model=RegisterResponse, status_code=status.HTTP_201_CREATED, summary="Register a new user",
+    description="""
+    Create a new user account.
+
+    - Email must be unique.
+    - Password is securely hashed before storing.
+    - Returns the newly created user details.
+    """,
+    responses={
+        201: {"description": "User registered successfully"},
+        400: {"description": "Email already registered"},
+        422: {"description": "Validation error"}
+    }
 )
-logger = logging.getLogger(__name__)
+def register(user: RegisterRequest, db: Session = Depends(get_db)):
+    # Register a new CircleUp user.
+    return register_user(user, db)
 
-router = APIRouter(prefix="/auth", tags=["Auth"])
 
-@router.post("/register",response_model=RegisterResponse,status_code=status.HTTP_201_CREATED)
-def register(user:RegisterRequest, db:Session = Depends(get_db)):
-    existing_user = db.query(User).filter(User.email == user.email).first()
-    if existing_user:
-        logger.warning(f"Registration Failed: Email: {user.email} already exists")
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,detail="Email already registered")
-    hashed = hash_password(user.password)
+@router.post("/login", response_model=LoginResponse, summary="User Login",
+    description="""
+    Authenticate an existing user.
 
-    new_user = User(
-                        name = user.name,
-                        email = user.email,
-                        password = hashed,
-                        phone_number = user.phone_number,
-                        city = user.city,
-                        bio = user.bio
-                    )
-    db.add(new_user)
-    db.commit()
-    db.refresh(new_user)
-    logger.info(f"New user '{new_user.email}' registered successfully!")
-    return new_user
-
-@router.post("/login",response_model=LoginResponse)
-def login(user:LoginRequest, db:Session = Depends(get_db)):
-    db_user = db.query(User).filter(User.email == user.email).first()
-    if not db_user:
-        logger.warning(f"Failed login: Email '{user.email}' not found")
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="User not found")
-    
-    if not verify_password(user.password, db_user.password):
-        logger.warning(f"Failed login: Incorrect password")
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail="Invalid password")
-    
-    token = create_access_token(data={"sub":db_user.email})
-    logger.info(f"Success: User '{db_user.email}' logged in successfully!")
-    return {
-            "access_token":token, "token_type":"bearer", 
-            "id":db_user.id,"name":db_user.name,"email":db_user.email
-           }
+    - Validates email and password.
+    - Generates a JWT access token.
+    - Returns authenticated user information.
+    """,
+    responses={
+        200: {"description": "Login successful"},
+        401: {"description": "Invalid password"},
+        404: {"description": "User not found"},
+        422: {"description": "Validation error"}
+    }
+)
+def login(user: LoginRequest,db: Session = Depends(get_db)):
+    #Authenticate a registered user.
+    return login_user(user, db)
