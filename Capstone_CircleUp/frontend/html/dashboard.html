@@ -1,11 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CircleUp Dashboard</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="/static/css/dashboard.css">
 </head>
 <body>
-    This is dashboard
+
+<header>
+    <div class="logo">
+        <i class="fa-solid fa-users"></i>
+        CircleUp
+    </div>
+    <div class="right">
+        <a href="#requestsSection" style="text-decoration: none;color: yellow;">
+            <i class="fa-solid fa-bell"></i>
+        </a>
+        <span onclick="window.location.href='/profile'" style="cursor: pointer;">
+            <i class="fa-solid fa-user"></i>
+            Qamar
+        </span>
+        <button class="logout-btn" onclick=logout()>Logout</button>
+    </div>
+</header>
+
+
+<div class="container">
+    <aside class="sidebar">
+        <ul>
+            <li id="profileLink">
+                <i class="fa-solid fa-user"></i> Profile
+            </li>
+            <li onclick="window.location.href='/browse-activities'">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Browse Activities
+            </li>
+            <li onclick="window.location.href='/create-activity'">
+                <i class="fa-solid fa-plus"></i> Create Activity
+            </li>
+            <li onclick="window.location.href='/my-activities'" class="dashboard-btn">
+                <i class="fa-solid fa-list"></i> My Activities
+            </li>
+        </ul>
+    </aside>
+
+    <main class="content">
+        <h2 id="welcomeText">Welcome 👋</h2>
+        <div class="stats">
+            <div class="card">
+                <h3>Created</h3>
+                <p id="createdCount">0</p>
+            </div>
+            <div class="card">
+                <h3>Joined</h3>
+                <p id="joinedCount">0</p>
+            </div>
+            <div class="card">
+                <h3>Pending</h3>
+                <p id="pendingCount">0</p>
+            </div>
+            <div class="card">
+                <h3>Completed</h3>
+                <p id="completedCount">0</p>
+            </div>
+        </div>
+
+
+        <div class="section" id="activitiesSection">
+            <h3>Recent Activities</h3>
+        </div>
+
+        <div class="section" style="border: 1px solid aqua;" id="requestsSection">
+            <h3>Notifications</h3>
+        </div>
+    </main>
+
+</div>
+    <div id="errorPopup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <p id="popupMessage"></p>
+        </div>
+    </div>
+
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/dashboard.js"></script>
 </body>
 </html>
