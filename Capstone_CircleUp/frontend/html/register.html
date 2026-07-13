@@ -34,8 +34,10 @@
                 <div class="form-row">
                     <div class="form-group full-width">
                         <label><i class="fa-solid fa-lock" style="color: yellowgreen;"></i> Password <span class="required">*</span></label>
-                        <input type="password" id="password" placeholder="Create a strong password" required>
-                        <div class="password-strength" id="passwordStrength"></div>
+                        <div style="position: relative;">
+                            <input type="password" id="password" placeholder="Create a strong password" required>
+                            <i class="fa-solid fa-eye toggleEye" id="togglePassword"></i>
+                        </div>
                         <ul class="password-requirements" id="passwordReq">
                             <li id="reqLength">✓ 8-15 characters</li>
                             <li id="reqSpecial">✓ At least 1 special character (!@#$%^&*)</li>
