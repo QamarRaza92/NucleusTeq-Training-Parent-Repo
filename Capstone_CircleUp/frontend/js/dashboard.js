@@ -62,24 +62,30 @@ function loadActivities(activities) {
 
     const section = document.querySelectorAll(".section")[0];
 
-    let html = `<h3>Recent Activities</h3>`;
+    let html = `<h3> <span>📅</span> Recent Activities
+                </h3>`;
 
     if (activities.length === 0) {
         html += `<p>No activities found.</p>`;
     }
     else {
         // Display recently created activities.
-        activities.forEach(activity => {
-            html += `
-            <div class="section-child">
-                <span>${activity.title}</span>
-
-                <button onclick="viewActivity(${activity.id})">
-                    View
-                </button>
+      activities.forEach(activity => {
+    html += `
+    <div class="section-child" style="display: flex; align-items: center; justify-content: space-between;padding: 12px; margin-bottom: 10px; border-radius: 12px; font-family: sans-serif;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <h4> <i class="fa-solid fa-calendar-days" style="color: white;"></i> </h4>
+            <div style="display: flex; flex-direction: column;">
+                <b style="color: white;">${activity.title}</b>
+                <small style="margin-top:10px;"> 
+                <i class="fa-solid fa-clock" style="margin-right: 4px;"></i> ${activity.date} • 
+                <i class="fa-solid fa-tag" style="margin-left:10px;"></i>  ${activity.status}</small>
             </div>
-            `;
-        });
+        </div>
+        <button onclick="viewActivity(${activity.id})" style="background: #f7eb06; border: none; padding: 8px 16px; border-radius: 20px; font-weight: bold; cursor: pointer;">View</button>
+    </div>
+    `;
+});
     }
 
     section.innerHTML = html;
@@ -89,7 +95,7 @@ function loadRequests(requests) {
 
     const section = document.querySelectorAll(".section")[1];
 
-    let html = `<h3>Notifications</h3>`;
+    let html = `<h3> <span>🔔</span> Notifications</h3>`;
 
     if (requests.length === 0) {
         html += `<p>No pending requests.</p>`;
@@ -100,8 +106,9 @@ function loadRequests(requests) {
             html += `
             <div class="section-child">
                 <span>
-                    Request ${req.request_id}:- ${req.participant} (${req.participant_email}) wants to join '${req.activity_id}':
-                    <b>${req.activity}</b>
+                    <i class="fa-solid fa-user-plus" style="color: yellow;"></i> 
+                    ${req.participant} (${req.participant_email}) wants to join :
+                      <i class="fa-solid fa-calendar-days" ></i>  "<b>${req.activity}</b>"
                 </span>
 
                 <div>
