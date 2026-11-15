@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="/static/css/profile.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-card">
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <h1 id="name">Loading...</h1>
+                <p class="profile-role">User</p>
+                <div class="profile-location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span id="city">Loading...</span>
+                </div>
+            </div>
+
+            <!-- Profile Stats -->
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="created">0</span>
+                    <span class="stat-label">Events Created</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="joined">0</span>
+                    <span class="stat-label">Events Joined</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="pending">0</span>
+                    <span class="stat-label">Pending</span>
+                </div>
+            </div>
+
+            <!-- Profile Info -->
+            <div class="profile-info">
+                <div class="info-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <div>
+                        <span class="info-label">Phone</span>
+                        <span class="info-value" id="phone">+91 9876543210</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <div>
+                        <span class="info-label">Email</span>
+                        <span class="info-value" id="email">raza8bb805@gmail.com</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <div>
+                        <span class="info-label">Bio</span>
+                        <span class="info-value" id="bio">Loading...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="profile-actions">
+                <a href="/edit-profile" class="btn-edit">
+                    <i class="fa-solid fa-pen"></i>
+                    Edit Profile
+                </a>
+                <a href="/dashboard" class="btn-dashboard">
+                    <i class="fa-solid fa-gauge-high"></i>
+                    Dashboard
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/profile.js"></script>
+</body>
+</html>
