@@ -1,0 +1,194 @@
+.form-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.form-card {
+    background: #121212;
+    border-radius: 24px;
+    padding: 30px 35px;
+    border: 1px solid yellow;
+    width: 100%;
+    max-width: 600px;
+}
+
+.card-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.card-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 5px;
+}
+
+.card-header .subtitle {
+    color: #888;
+    font-size: 14px;
+}
+
+.edit-profile-form .form-group {
+    margin-bottom: 18px;
+}
+
+.edit-profile-form label {
+    display: block;
+    color: #e0e0e0;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.edit-profile-form label i {
+    margin-right: 6px;
+}
+
+.edit-profile-form input,
+.edit-profile-form select,
+.edit-profile-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    background: #1e1e1e;
+    border: 2px solid #333;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 15px;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.edit-profile-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.edit-profile-form input:focus,
+.edit-profile-form select:focus,
+.edit-profile-form textarea:focus {
+    border-color: #8b5cf6;
+    background: #252525;
+    outline: none;
+}
+
+.edit-profile-form select {
+    appearance: none;
+    padding-right: 35px;
+    cursor: pointer;
+}
+
+select{
+    cursor:pointer;
+    appearance: auto;
+}
+
+select option{
+    padding:10px;
+}
+
+.edit-profile-form .submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 1s;
+}
+
+.edit-profile-form .submit-btn:hover {
+    transform: translateY(-2px);
+    background: #22c55e;
+    box-shadow: 0 8px 25px rgba(181, 167, 9, 0.779);
+}
+
+.back-link-wrapper {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid #2a2a2a;
+}
+
+.back-link-wrapper .btn-back {
+    display: inline-block;
+    color: #888;
+    text-decoration: none;
+    padding: 8px 18px;
+    background: rgba(139, 92, 246, 0.1);
+    border-radius: 40px;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    font-size: 14px;
+}
+
+.back-link-wrapper .btn-back:hover {
+    background: #8b5cf6;
+    color: #fff;
+}
+
+.status-message {
+    padding: 10px 14px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    font-size: 14px;
+    display: none;
+}
+
+select{
+    cursor:pointer;
+    appearance: auto;
+}
+
+select option{
+    padding:10px;
+}
+
+.status-message.success {
+    display: block;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid #22c55e;
+    color: #22c55e;
+}
+
+@media (max-width: 768px) {
+    .form-card {
+        padding: 25px 20px;
+    }
+    .card-header h1 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        padding: 12px;
+        align-items: flex-start;
+        padding-top: 20px;
+    }
+    .form-card {
+        padding: 18px 14px;
+    }
+    .card-header h1 {
+        font-size: 20px;
+    }
+    .edit-profile-form input,
+    .edit-profile-form select,
+    .edit-profile-form textarea {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    .edit-profile-form .submit-btn {
+        padding: 12px;
+        font-size: 14px;
+    }
+}

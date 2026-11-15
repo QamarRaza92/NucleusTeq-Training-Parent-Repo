@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Activity</title>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/create-activity.css">
+    <link rel="stylesheet" href="/static/css/edit-profile.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<div class="form-container">
+    <div class="form-card">
+        <div class="card-header">
+            <h1>
+                <i class="fa-solid fa-pen"></i>
+                Edit Activity
+            </h1>
+
+            <p class="subtitle">
+                Update your activity
+            </p>
+        </div>
+
+        <form id="editActivityForm">
+            <div class="form-group">
+                <label><i class="fa-solid fa-user" style="color: #8b5cf6;"></i> Title</label>
+                <input type="text" id="title" placeholder="Activity Title" minlength="3" maxlength="50">
+            </div>
+
+            <div class="form-group">
+                <label><i class="fa-solid fa-align-left"></i> Description</label>
+                <textarea id="description" rows="5"
+                placeholder="Describe your activity"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fa-solid fa-layer-group"></i> Category</label>
+                <select id="category">
+                    <option value="">Choose Category</option>
+
+                    <option value="SPORTS">🏏 Sports</option>
+                    <option value="EDUCATION">📚 Education</option>
+                    <option value="MUSIC">🎵 Music</option>
+                    <option value="ART">🎨 Art</option>
+                    <option value="CHARITY">❤️ Charity</option>
+                    <option value="CORPORATE">💼 Corporate</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fa-solid fa-location-dot"></i> City</label>
+                <select id="location">
+                    <option value="">📍 Select City</option>
+
+                    <option value="Mumbai">📍 Mumbai</option>
+                    <option value="New Delhi">📍 New Delhi</option>
+                    <option value="Bengaluru">📍 Bengaluru</option>
+                    <option value="Indore">📍 Indore</option>
+                    <option value="Pune">📍 Pune</option>
+                    <option value="Hyderabad">📍 Hyderabad</option>
+                    <option value="Patna">📍 Patna</option>
+                    <option value="Jaipur">📍 Jaipur</option>
+                    <option value="Lucknow">📍 Lucknow</option>
+                    <option value="New York">📍 New York</option>
+                    <option value="Scranton">📍 Scranton</option>
+                    <option value="california">📍 California</option>
+                    <option value="Alburquerque">📍 Alburquerque</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fa-solid fa-calendar"></i> Date</label>
+                <input type="date" id="date">
+            </div>
+
+            <div class="form-group">
+                <label><i class="fa-solid fa-clock"></i> Time</label>
+                <input type="time" id="time">
+            </div>
+
+            <div class="form-group">
+                <label><i class="fa-solid fa-users"></i> Maximum Participants</label>
+                <input type="number" id="max_participants" min="1">
+            </div>
+
+            <button class="submit-btn" type="submit">
+                <i class="fa-solid fa-floppy-disk"></i>
+                Update Activity
+            </button>
+
+            <div class="back-link-wrapper">
+
+                <a href="/dashboard" class="btn-back" style="color: rgba(238, 238, 49, 0.774);">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to Dashboard
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="errorPopup" class="popup">
+    <div class="popup-content">
+        <span class="close-btn">&times;</span>
+        <p id="popupMessage"></p>
+    </div>
+</div>
+
+<script src="/static/js/auth.js"></script>
+<script src="/static/js/edit-activity.js"></script>
+</body>
+</html>
