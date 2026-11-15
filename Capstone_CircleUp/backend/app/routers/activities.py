@@ -69,7 +69,7 @@ def my_rejected_activities(db: Session = Depends(get_db), current_user: User = D
 
 
 # Get activity by ID
-@router.get("/{activity_id}",response_model=ActivityResponse, status_code=status.HTTP_200_OK, summary="Get activity detail",
+@router.get("/{activity_id}",status_code=status.HTTP_200_OK, summary="Get activity detail",
     description="Returns full detail of a single activity. Phone number is visible only to the organizer or approved participants.",
     responses={
         200: {"description": "Activity fetched successfully"},

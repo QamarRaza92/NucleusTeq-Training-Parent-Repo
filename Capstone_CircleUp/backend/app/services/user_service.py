@@ -142,7 +142,10 @@ def get_dashboard(db: Session,current_user: User):
         "activities": [
             {
                 "id": activity.id,
-                "title": activity.title
+                "title": activity.title,
+                "date": activity.date,
+                "time": activity.time,
+                "status": activity.status
             }
             for activity in recent_activities
         ],

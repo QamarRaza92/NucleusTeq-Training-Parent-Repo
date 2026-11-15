@@ -81,9 +81,9 @@ async function loadActivity() {
             // Load all pending participation requests for this activity.
             loadRequests();
 
-        } else if (a.status == "OPEN") {
+        } else if (a.status == "OPEN" && !a.has_applied) {
 
-            // Non-organizers can join only if the activity is open.
+            // Non-organizers can join only if the activity is open and they haven't applied.
             buttons.innerHTML += `
                 <button
                     class="btn-join-detail"

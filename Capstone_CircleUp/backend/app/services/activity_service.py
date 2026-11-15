@@ -182,9 +182,31 @@ def get_activity(activity_id: int, db: Session, current_user: User):
         else None
     )
 
+    has_applied = (
+        db.query(Participation)
+        .filter(
+            Participation.activity_id == activity_id,
+            Participation.participant_id == current_user.id
+        ).first()
+        is not None
+    )
+
     logger.info(f"User '{current_user.email}' viewed activity '{activity.title}'.")
 
-    return activity
+    return {
+        "id": activity.id,
+        "title": activity.title,
+        "description": activity.description,
+        "status": activity.status,
+        "category": activity.category,
+        "location": activity.location,
+        "date": activity.date,
+        "time": activity.time,
+        "max_participants": activity.max_participants,
+        "organizer_id": activity.organizer_id,
+        "organizer_phone": activity.organizer_phone,
+        "has_applied": has_applied
+    }
 
 
 def create_activity(activity: ActivityRequest, db: Session, current_user: User):
