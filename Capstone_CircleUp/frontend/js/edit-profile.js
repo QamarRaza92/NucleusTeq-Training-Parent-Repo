@@ -1,76 +1,125 @@
 const token = getToken();
+
 window.onload = loadProfile;
-async function loadProfile(){
-    const response = await fetch(`${API_BASE}/users/me`,{
-        headers:{
-            Authorization:`Bearer ${token}`
+
+async function loadProfile()
+{
+    try
+    {
+        const response = await fetch(
+            `${API_BASE}/users/me`,
+            {
+                headers:{
+                    Authorization:`Bearer ${token}`
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        if(!response.ok)
+        {
+            showNotification(data.detail);
+            return;
         }
-    });
-    const data = await response.json();
-    document.getElementById("name").value = data.name;
-    document.getElementById("phone_number").value = data.phone_number;
-    document.getElementById("bio").value = data.bio || "";
-    document.getElementById("city").value = data.city;
+
+        // Fill profile form with current user details.
+        document.getElementById("name").value = data.name;
+        document.getElementById("phone_number").value = data.phone_number;
+        document.getElementById("bio").value = data.bio || "";
+        document.getElementById("city").value = data.city;
+    }
+    catch(error)
+    {
+        showNotification("Failed to load profile. Please try again.");
+    }
 }
 
 if (document.getElementById("editProfileForm"))
 {
     document.getElementById("editProfileForm").addEventListener(
-                                                                "submit",
-                                                                async(e) => {
-                                                                            e.preventDefault();
-                                                                            const name = document.getElementById("name").value;
-                                                                            const bio = document.getElementById("bio").value;
-                                                                            const phone_number = document.getElementById("phone_number").value;
-                                                                            const city = document.getElementById("city").value;
+        "submit",
+        async(e) => {
+            e.preventDefault();
 
-                                                                            if (!name && !bio && !phone_number && !city)
-                                                                            {
-                                                                                showNotification("Fill at least 1 field to update profile");
-                                                                                return;
-                                                                            }
+            const name = document.getElementById("name").value;
+            const bio = document.getElementById("bio").value;
+            const phone_number = document.getElementById("phone_number").value;
+            const city = document.getElementById("city").value;
 
-                                                                            try
-                                                                            {
-                                                                                const response = await fetch(
-                                                                                                          `${API_BASE}/users/me`,
-                                                                                                          {
-                                                                                                            method: "PUT",
-                                                                                                            headers: {
-                                                                                                                      "Content-Type": "application/json",
-                                                                                                                      "Authorization": `Bearer ${token}`
-                                                                                                                     },
-                                                                                                            body: JSON.stringify(
-                                                                                                                                    {
-                                                                                                                                        name: name || undefined,
-                                                                                                                                        bio: bio || undefined,
-                                                                                                                                        phone_number: phone_number || undefined,
-                                                                                                                                        city: city || undefined
+            // Ensure at least one field is provided for update.
+            if (!name && !bio && !phone_number && !city)
+            {
+                showNotification("Fill at least 1 field to update profile");
+                return;
+            }
 
-                                                                                                                                    }
-                                                                                                                                )
-                                                                                                          }
-                                                                                                        );
+            // Validate Indian mobile number before sending request.
+            const numberCheck = isValidIndianNumber(phone_number);
 
-                                                                                const data = await response.json();
+            if(!numberCheck.valid)
+            {
+                showNotification(numberCheck.message);
+                return;
+            }
 
-                                                                                if(response.ok)
-                                                                                {
-                                                                                    showNotification("Profile Updated Successfully!","success");
-                                                                                    setTimeout(()=>{
-                                                                                        window.location.href="/profile";
-                                                                                    },1000);
-                                                                                }
-                                                                                else 
-                                                                                {
-                                                                                    showNotification(data.detail || "Updation Failed");
-                                                                                }
-                                                                            }
-                                                                            catch(error)
-                                                                            {
-                                                                                console.error("Error: Profile Updation Failed! ", error);
-                                                                                showNotification(error.message || "Network connection failed!");
-                                                                            }
-                                                                            }
-                                                               );
+            try
+            {
+                const response = await fetch(
+                    `${API_BASE}/users/me`,
+                    {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`
+                        },
+                        body: JSON.stringify(
+                            {
+                                name: name || undefined,
+                                bio: bio || undefined,
+                                phone_number: phone_number || undefined,
+                                city: city || undefined
+                            }
+                        )
+                    }
+                );
+
+                const data = await response.json();
+
+                if(response.ok)
+                {
+                    showNotification("Profile Updated Successfully!","success");
+
+                    setTimeout(
+                        ()=>{
+                            window.location.href="/profile";
+                        },
+                        1000
+                    );
+                }
+                else
+                {
+                    // Display validation or application errors returned by backend.
+                    if (Array.isArray(data.detail))
+                    {
+                        const messages = data.detail.map(
+                            err => {
+                                return `Error: ${err.msg}. `;
+                            }
+                        );
+
+                        showNotification(messages.join("\n"), "error");
+                    }
+                    else
+                    {
+                        showNotification(data.detail || "Profile update failed!", "error");
+                    }
+                }
+            }
+            catch(error)
+            {
+                showNotification(error.message || "Network connection failed!");
+            }
+        }
+    );
 }

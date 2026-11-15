@@ -37,3 +37,35 @@ def register():
 @app.get("/dashboard")
 def dashboard():
     return FileResponse("../frontend/html/dashboard.html")
+
+@app.get("/activity/{activity_id}")
+def activity_page(activity_id: int):
+    return FileResponse("../frontend/html/activity.html")
+
+@app.get("/profile")
+def profile():
+    return FileResponse("../frontend/html/profile.html")
+
+@app.get("/edit-profile")
+def edit_profile():
+    return FileResponse("../frontend/html/edit-profile.html")
+
+@app.get("/browse-activities")
+def browse():
+    return FileResponse("../frontend/html/browse-activities.html")
+
+@app.get("/activity-detail/{activity_id}")
+def activity_detail(activity_id: int):
+    return FileResponse("../frontend/html/activity-detail.html")
+
+@app.get("/edit-activity/{activity_id}")
+def edit_activity(activity_id: int):
+    return FileResponse("../frontend/html/edit-activity.html")
+
+@app.get("/create-activity")
+def create_activity():
+    return FileResponse("../frontend/html/create-activity.html")
+
+@app.get("/my-activities")
+def my_activities():
+    return FileResponse("../frontend/html/my-activities.html")

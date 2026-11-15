@@ -20,7 +20,7 @@
                 <div class="form-row">
                     <div class="form-group full-width">
                         <label><i class="fa-solid fa-user" style="color: green;"></i> Full name <span class="required">*</span></label>
-                        <input type="text" id="name" placeholder="e.g., Qamar Raza" required>
+                        <input type="text" id="name" placeholder="e.g., Qamar Raza" required minlength="3" maxlength="50">
                     </div>
                 </div>
 
@@ -34,12 +34,14 @@
                 <div class="form-row">
                     <div class="form-group full-width">
                         <label><i class="fa-solid fa-lock" style="color: yellowgreen;"></i> Password <span class="required">*</span></label>
-                        <input type="password" id="password" placeholder="Create a strong password" required>
-                        <div class="password-strength" id="passwordStrength"></div>
+                        <div style="position: relative;">
+                            <input type="password" id="password" placeholder="Create a strong password" required>
+                            <i class="fa-solid fa-eye toggleEye" id="togglePassword"></i>
+                        </div>
                         <ul class="password-requirements" id="passwordReq">
                             <li id="reqLength">✓ 8-15 characters</li>
-                            <li id="reqUpper">✓ At least 1 uppercase letter</li>
                             <li id="reqSpecial">✓ At least 1 special character (!@#$%^&*)</li>
+                            <li id="reqNumber">✓ At least 1 number</li>
                         </ul>
                     </div>
                 </div>
@@ -47,7 +49,7 @@
                 <div class="form-row">
                     <div class="form-group full-width">
                         <label><i class="fa-solid fa-phone" style="color: #198754;"></i> Phone number <span class="required">*</span></label>
-                        <input type="tel" id="phone" placeholder="98765 43210" required>
+                        <input type="tel" id="phone" placeholder="9876543210" required minlength="10" maxlength="10">
                     </div>
                 </div>
 

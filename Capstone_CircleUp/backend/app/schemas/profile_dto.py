@@ -3,7 +3,7 @@ from typing import Optional
 
 class ProfileUpdateRequest(BaseModel):
     name : Optional[str] = Field(default=None,title="name",examples=["MS Dhoni","Leonel Messi"], min_length=3, max_length=50)
-    phone_number : Optional[str] = Field(default=None,title="phone number",examples=["83194173XX"], min_length=3, max_length=10)
+    phone_number : Optional[str] = Field(default=None,title="phone number",examples=["83194173XX"], min_length=10, max_length=10)
     city : Optional[str] = Field(default=None,title="city",examples=["Mumbai"])
     bio : Optional[str] = Field(default=None,title="bio",examples=["Just vibing"])
 

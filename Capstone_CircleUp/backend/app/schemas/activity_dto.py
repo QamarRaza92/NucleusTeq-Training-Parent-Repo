@@ -1,31 +1,18 @@
 from pydantic import Field, field_validator, BaseModel, ConfigDict
 from typing import Optional
 import datetime
-from enum import Enum
+from app.enums.activity_catergory_enum import ActivityCategoryEnum
+from app.enums.activity_status_enum import ActivityStatusEnum
 
 ALLOWED_CITIES = {
     'Mumbai', 'New Delhi', 'Bengaluru', 'Indore', 'california', 'Alburquerque',
     'New York', 'Scranton', 'Pune', 'Patna', 'Jaipur', 'Lucknow', 'Hyderabad'
 }
 
-class CategoryEnum(str, Enum):
-    SPORTS = "SPORTS"
-    EDUCATION = "EDUCATION"
-    MUSIC = "MUSIC"
-    ART = "ART"
-    CHARITY = "CHARITY"
-    CORPORATE = "CORPORATE"
-
-class StatusEnum(str, Enum):
-    OPEN = "OPEN"
-    FULL = "FULL"
-    COMPLETED = "COMPLETED"
-    CANCELLED = "CANCELLED"
-
 class ActivityRequest(BaseModel):
     title: str = Field(..., examples=['Cricket Match'], min_length=3, max_length=50)
     description: Optional[str] = None
-    category: CategoryEnum
+    category: ActivityCategoryEnum
     location: str = Field(..., examples=['Indore'])
     date: datetime.date 
     time: datetime.time
@@ -45,8 +32,8 @@ class ActivityResponse(BaseModel):
     id: int 
     title: str = Field(..., examples=['Cricket Match'])
     description: Optional[str] = None
-    status: StatusEnum
-    category: CategoryEnum
+    status: ActivityStatusEnum
+    category: ActivityCategoryEnum
     location: str = Field(..., examples=['Indore'])
     date: datetime.date
     time: datetime.time
@@ -58,7 +45,7 @@ class ActivityResponse(BaseModel):
 class ActivityUpdateRequest(BaseModel):
     title: Optional[str] = Field(default=None, examples=['Cricket Match'], min_length=3, max_length=50)
     description: Optional[str] = None
-    category: Optional[CategoryEnum] = None 
+    category: Optional[ActivityCategoryEnum] = None 
     location: Optional[str] = None
     date: Optional[datetime.date] = None
     time: Optional[datetime.time] = None 
@@ -79,8 +66,8 @@ class ActivityUpdateResponse(BaseModel):
 
     title: str
     description: Optional[str] = None
-    status: StatusEnum
-    category: CategoryEnum
+    status: ActivityStatusEnum
+    category: ActivityCategoryEnum
     location: str 
     date: datetime.date
     time: datetime.time 

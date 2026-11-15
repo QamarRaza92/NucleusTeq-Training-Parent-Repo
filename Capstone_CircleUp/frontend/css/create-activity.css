@@ -53,6 +53,13 @@ textarea:focus{
     transition: 0.1s;
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(1) brightness(2);
+}
+
+
 .submit-btn:hover{
     background: green;
     box-shadow: 0 3px 10px aquamarine;
